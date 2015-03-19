@@ -22,7 +22,7 @@ var error = function (m) {
     var msg = m + ' at ' + at+ ':'+text.length+': ';
     var s = Math.max(at-10, 0);
     var e = Math.min(at+30, text.length);
-    var code = text.slice(s, at-1) + '>> '+ ch +' <<' + text.slice(at, e);
+    var code = text.slice(s, at-1) + ' >>'+ ch +'<< ' + text.slice(at, e);
 
     msg += code;
 
@@ -128,7 +128,34 @@ var white = function () {
         next();
     }
 };
+var maybe = function(str) {
+    var i = 0;
+    while ( i < str.length ) {
+        if ( text.charAt(at+i-1) != str.charAt(i) ) {
+            return false;
+        }
+        i++;
+    }
+
+    ch = text.charAt(at+i-1);
+    at += i;
+
+    return true;
+};
 var literal = function () {
+
+    white();
+
+    if ( maybe('true') ) {
+        return true;
+    }
+    if ( maybe('false') ) {
+        return false;
+    }
+    if ( maybe('null') ) {
+        return null;
+    }
+
     var ret = control_chars.LITERAL;
 
     var brackets = [
