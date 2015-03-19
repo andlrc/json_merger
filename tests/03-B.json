@@ -1,0 +1,64 @@
+{
+	"@extends": ["03-A.json"],
+	"model": {
+		"@delete": ["proxy"],
+		"entities": {
+			"WSHNTFTR00": {
+				"@override" : ["title"],
+				"@comment": "Specific title for this customer...",
+				"title": {
+					"da": "Blingscenter",
+					"en": "Bling Center"
+				},
+				"columns": {
+					"@comment": "Customer specific property...",
+					"MIN_TEST": {
+						"title": {
+							"da": "Min test",
+							"en": "Min test"
+						},
+						"type": "integer"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"features": {
+								"preview": {
+									"@comment": "Preview is not active for this customer...",
+									"active": false
+								}
+							},
+							"columns": [
+								{
+									"@append": true,
+									"name": "MIN_TEST",
+									"width": 50
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"@override": ["title"],
+							"@comment": "Specific title for this view...",
+							"title": {
+								"da": "Blinger",
+								"en": "Bling"
+							},
+							"groups": {
+								"system": {
+									"@override": true,
+									"title": {
+										"da": "Test system",
+										"en": "Test system"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

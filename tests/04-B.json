@@ -1,0 +1,14 @@
+{
+	"@extends": ["04-A.json"],
+	"@delete": ["array2"],
+	"array": [
+		{
+			"@match": "[name=qwerty][a=2]",
+			"@delete": true
+		},
+		{
+			"@match": "[name=tkn]",
+			"@move": 0
+		}
+	]
+}

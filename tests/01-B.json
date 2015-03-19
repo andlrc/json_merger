@@ -1,0 +1,20 @@
+{
+	"myArray": [
+		{
+			"b": 10
+		},
+		{
+			"b": 20
+		}
+	],
+	"myObject": {
+		"prop1": 10,
+		"prop2": {
+			"@override": true,
+			"b": 20
+		},
+		"prop3": {
+			"b": 30
+		}
+	}
+}

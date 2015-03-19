@@ -1,0 +1,5520 @@
+{
+	"name": "webshop.dmd",
+	"xpd": {
+		"site": "xpd/site.xpd",
+		"pages": "xpd/pages.xpd",
+		"pagelayout": "xpd/pagelayout.xpd",
+		"product": "xpd/product.xpd",
+		"names": "xpd/names.xpd",
+		"address": "xpd/address.xpd",
+		"billing": "xpd/billing.xpd",
+		"courier": "xpd/courier.xpd",
+		"courierprices": "xpd/courierprices.xpd",
+		"clienttype": "xpd/clienttype.xpd",
+		"language": "xpd/language.xpd",
+		"notification": "xpd/notification.xpd"
+	},
+	"notes": [],
+	"proxy": "ip2-services/ip2dmdProxy.aspx",
+	"model": {
+		"title": {
+			"da": "Webshop",
+			"en": "Webshop"
+		},
+		"proxy": {
+			"defaultHive": "ip2-services/",
+			"url": "ip2dmdProxy.aspx"
+		},
+		"API": {
+			"eventHandler": "ip2-services/ip2dmdProxy.aspx"
+		},
+		"menu": [
+			{
+				"type": "entity",
+				"entity": "WSHPAGET00"
+			},
+			{
+				"type": "link",
+				"url": "/wsh-base/widgets/navigation.widget",
+				"title": {
+					"en": "Navigation",
+					"da": "Navigation"
+				}
+			},
+			{
+				"type": "link",
+				"url": "/wsh-base/widgets/contact.widget",
+				"title": {
+					"en": "Contacts",
+					"da": "Kontakter"
+				}
+			},
+			{
+				"type": "link",
+				"url": "/wsh-base/widgets/catalog.widget",
+				"title": {
+					"en": "Catalog",
+					"da": "Katalog"
+				}
+			},
+			{
+				"type": "entity",
+				"entity": "WSHITMET00"
+			},
+			{
+				"type": "entity",
+				"entity": "WSHWHIET00"
+			},
+			{
+				"type": "entity",
+				"entity": "WSHPLBET00"
+			},
+			{
+				"type": "link",
+				"url": "/wsh-base/widgets/manufacturer.widget",
+				"title": {
+					"en": "Manufacturers",
+					"da": "Producenter"
+				}
+			},
+			{
+				"type": "entity",
+				"entity": "WSHCURET00",
+				"title": {
+					"da": "Transportører",
+					"en": "Couriers"
+				}
+			},
+			{
+				"type": "entity",
+				"entity": "WSHCRPET00"
+			},
+			{
+				"type": "entity",
+				"entity": "WSHCLNET00"
+			},
+			{
+				"type": "entity",
+				"entity": "WSHFLIET00"
+			},
+			{
+				"type": "entity",
+				"entity": "WSHBCKTR00"
+			},
+			{
+				"type": "entity",
+				"entity": "WSHNTFTR00"
+			},
+			{
+				"type": "group",
+				"title": {
+					"en": "Settings",
+					"da": "Indstillinger"
+				},
+				"items": [
+					{
+						"type": "entity",
+						"entity": "WSHSITET00"
+					},
+					{
+						"type": "entity",
+						"entity": "WSHREDET00"
+					},
+					{
+						"type": "entity",
+						"entity": "WSHFRMET00"
+					},
+					{
+						"type": "entity",
+						"entity": "WSHLNGET00"
+					}
+				]
+			}
+		],
+		"defaults": {
+			"permission": {
+				"locked": {
+					"form": false,
+					"grid": false
+				},
+				"add": {
+					"form": true,
+					"grid": true
+				},
+				"edit": {
+					"form": true,
+					"grid": false
+				},
+				"remove": {
+					"grid": true,
+					"form": true
+				}
+			}
+		},
+		"entities": {
+			"WSHLNGET00": {
+				"title": {
+					"da": "Sprog",
+					"en": "Languages",
+					"fr": "Langues",
+					"de": "Sprachen"
+				},
+				"cid": "AE",
+				"idColumn": "LNGLNGTKN",
+				"titleColumn": "LNGNAME",
+				"columns": {
+					"LNGLNGTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID",
+							"fr": "ID",
+							"de": "ID"
+						},
+						"type": "integer"
+					},
+					"LNGCODE": {
+						"title": {
+							"da": "Sprog",
+							"en": "Language",
+							"fr": "Langue",
+							"de": "Sprache"
+						},
+						"type": "varchar(16)",
+						"uitype": "enum",
+						"enum": "languages",
+						"isTitle": true
+					},
+					"LNGPRIMARY": {
+						"title": {
+							"da": "Primær sprog",
+							"en": "Primary Language",
+							"fr": "Langue principale",
+							"de": "Hauptsprache"
+						},
+						"type": "varchar(5)",
+						"uitype": "boolean"
+					},
+					"LNGPROP": {
+						"title": {
+							"da": "Proxy XPD",
+							"en": "Proxy XPD",
+							"fr": "Proxy XPD",
+							"de": "Proxy XPD"
+						},
+						"type": "varchar(4096)",
+						"uitype": "xpd",
+						"xpd": "language"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "LNGLNGTKN",
+									"width": 50
+								},
+								{
+									"name": "LNGPRIMARY",
+									"width": 100
+								},
+								{
+									"name": "LNGCODE"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Sprog",
+								"en": "Language"
+							},
+							"columns": [
+								{
+									"name": "LNGLNGTKN"
+								},
+								{
+									"name": "LNGCODE"
+								},
+								{
+									"name": "LNGPRIMARY"
+								},
+								{
+									"name": "LNGPROP"
+								}
+							],
+							"layout": {
+								"portlets": {
+									"index": 0,
+									"title": {
+										"da": "ERP",
+										"en": "ERP",
+										"de": "ERP",
+										"fr": "ERP"
+									},
+									"hidden": true
+								},
+								"LNGPROP": {
+									"index": 1
+								}
+							},
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "LNGLNGTKN"
+										},
+										{
+											"name": "LNGCODE"
+										},
+										{
+											"name": "LNGPRIMARY"
+										},
+										{
+											"name": "LNGPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHSITET00": {
+				"title": {
+					"da": "Sideindstillinger",
+					"en": "Site Setup"
+				},
+				"cid": "N",
+				"idColumn": "SITSITTKN",
+				"titleColumn": "SITPROP_NAME",
+				"columns": {
+					"SITSITTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"SITPROP": {
+						"title": {
+							"da": "Hjemmeside konfiguration",
+							"en": "Website configuration"
+						},
+						"xpd": "site",
+						"type": "varchar(20000)",
+						"uitype": "xpd"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "SITSITTKN",
+									"width": 50
+								},
+								{
+									"name": "SITPROP_NAME",
+									"from": "( jsonGetStr(SITPROP, 'name') )",
+									"isTitle": true
+								},
+								{
+									"name": "SITPROP_HTTP_HOST",
+									"from": "( jsonGetStr(SITPROP, 'http_host') )"
+								},
+								{
+									"name": "SITPROP_HTTP_HOST_ALIASES",
+									"from": "( jsonGetStr(SITPROP, 'http_host_aliases') )"
+								},
+								{
+									"name": "SITPROP_THEME",
+									"from": "( jsonGetStr(SITPROP, 'theme') )"
+								},
+								{
+									"name": "SITPROP_MAIN_SITE",
+									"from": "( jsonGetStr(SITPROP, 'main_site') )",
+									"width": 130
+								},
+								{
+									"name": "SITPROP_NO_FOLLOW",
+									"from": "( jsonGetStr(SITPROP, 'no_follow') )",
+									"width": 130
+								},
+								{
+									"name": "SITPROP_LANGUAGE_SUPPORTED",
+									"from": "( jsonGetStr(SITPROP, 'language_supported') )",
+									"uitype": "languages"
+								},
+								{
+									"name": "SITPROP_LANGUAGE_DEFAULT",
+									"from": "( jsonGetStr(SITPROP, 'language_default') )",
+									"enum": "languages",
+									"uitype": "enum"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Sideindstilling",
+								"en": "Page Setup"
+							},
+							"columns": [
+								{
+									"name": "SITSITTKN"
+								},
+								{
+									"name": "SITPROP"
+								}
+							],
+							"layout": {
+								"portlets": {
+									"index": 0,
+									"hidden": true
+								},
+								"SITPROP": {
+									"index": 1
+								}
+							},
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "SITSITTKN"
+										},
+										{
+											"name": "SITPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHPAGET00": {
+				"title": {
+					"da": "Sider",
+					"en": "Pages"
+				},
+				"cid": "L",
+				"idColumn": "PAGPAGTKN",
+				"columns": {
+					"PAGPAGTKN": {
+						"name": "PAGPAGTKN",
+						"type": "integer",
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						}
+					},
+					"PAGPROP": {
+						"name": "PAGPROP",
+						"type": "varchar(10000)",
+						"xpd": "pages",
+						"title": {
+							"da": "Side informationer",
+							"en": "Page Information"
+						}
+					},
+					"PAGLAYOUT": {
+						"name": "PAGLAYOUT",
+						"type": "varchar(10000)",
+						"xpd": "pagelayout",
+						"title": {
+							"da": "Side layout",
+							"en": "Page Layout"
+						}
+					}
+				},
+				"widgets": {
+					"pages": {
+						"title": {
+							"en": "Content",
+							"da": "Indhold"
+						},
+						"name": "pages",
+						"path": "/wsh-base/widgets/languagexpd.widget",
+						"dmd": "webshop.dmd",
+						"entity": "WSHPLGET00",
+						"view": "portfolio",
+						"xpd": "pages.xpd",
+						"propertyKey": "PLGPROP",
+						"fieldKey": "PAGPAGTKN",
+						"foreignKey": "PLGLNGCOD",
+						"relationKey": "PLGPAGTKN",
+						"widgets": {
+							"pagelayout": {
+								"name": "pagelayout",
+								"path": "/wsh-base/widgets/pagelayout.widget",
+								"xpd": "pagelayout.xpd",
+								"propertyKey": "PAGLAYOUT",
+								"title": {
+									"da": "Layout",
+									"en": "Layout"
+								}
+							},
+							"pagestack": {
+								"name": "pagestack",
+								"path": "/wsh-base/widgets/pagestack.widget",
+								"title": {
+									"da": "Stak",
+									"en": "Stack"
+								}
+							},
+							"pagenavigation": {
+								"name": "pagenavigation",
+								"path": "/wsh-base/widgets/pagenavigation.widget",
+								"title": {
+									"da": "Navigation",
+									"en": "Navigation"
+								}
+							}
+						}
+					}
+				},
+				"ui": {
+					"features": {
+						"preview": {
+							"src": "/wsh-base/widgets/urlPreview.widget",
+							"position": "right",
+							"embeded": "http://{0}/{1}/page/{2}",
+							"key": "PAGPAGTKN",
+							"active": false,
+							"toolbar": {
+								"reload": true,
+								"sizes": {
+									"desktop": true,
+									"tablet": true,
+									"mobile": true
+								}
+							}
+						}
+					},
+					"grids": {
+						"portfolio": {
+							"features": {
+								"preview": {}
+							},
+							"sort": "PLGPROP_TITLE, PAGPAGTKN",
+							"from": [
+								"WSHPAGET00 ",
+								"left join WSHPLGET00 on PAGPAGTKN = PLGPAGTKN and PLGLNGCOD = 'da'"
+							],
+							"columns": [
+								{
+									"name": "PAGPAGTKN",
+									"width": 50
+								},
+								{
+									"name": "PLGPROP_TITLE",
+									"from": "( jsonGetStr(PLGPROP, 'title') )",
+									"xpd": "pages",
+									"isTitle": true
+								},
+								{
+									"name": "PLGPROP_HEADER",
+									"from": "( jsonGetStr(PLGPROP, 'header') )",
+									"xpd": "pages"
+								},
+								{
+									"name": "PLGPROP_SUBHEADER",
+									"from": "( jsonGetStr(PLGPROP, 'subheader') )",
+									"xpd": "pages"
+								},
+								{
+									"name": "PLGPROP___CID__",
+									"from": "( jsonGetInt(PLGPROP, '__cid__') )",
+									"width": 130,
+									"uitype": "pageType",
+									"title": {
+										"da": "Type",
+										"en": "Type"
+									}
+								},
+								{
+									"name": "PLGPROP_SEOURL",
+									"from": "( jsonGetStr(PLGPROP, 'seourl') )",
+									"xpd": "pages"
+								},
+								{
+									"name": "PLGPROP_METATITLE",
+									"from": "( jsonGetStr(PLGPROP, 'metatitle') )",
+									"xpd": "pages",
+									"hidden": true
+								},
+								{
+									"name": "PLGPROP_METADESCRIPTION",
+									"from": "( jsonGetStr(PLGPROP, 'metadescription') )",
+									"xpd": "pages",
+									"hidden": true
+								},
+								{
+									"name": "PLGPROP_METAKEYWORDS",
+									"from": "( jsonGetStr(PLGPROP, 'metakeywords') )",
+									"xpd": "pages",
+									"hidden": true
+								},
+								{
+									"name": "PLGPROP_SITECLUDE",
+									"from": "( jsonGetStr(PLGPROP, 'siteclude') )",
+									"xpd": "pages",
+									"hidden": true
+								},
+								{
+									"name": "PLGPROP_WEBACTIVE",
+									"from": "( pageWebActive ( PAGPAGTKN) )",
+									"xpd": "pages",
+									"uitype": "webactivelanguage",
+									"width": 80
+								},
+								{
+									"name": "PLGPROP_EXPIREDATE",
+									"from": "( jsonGetStr(PLGPROP, 'expiredate') )",
+									"xpd": "pages",
+									"hidden": true
+								},
+								{
+									"name": "PLGPROP_PUBDATE",
+									"from": "( jsonGetStr(PLGPROP, 'pubdate') )",
+									"xpd": "pages",
+									"hidden": true
+								}
+							]
+						},
+						"call2action": {
+							"sort": "PLGPROP_TITLE, PAGPAGTKN",
+							"from": [
+								"WSHPAGET00 ",
+								"left join WSHPLGET00 on PAGPAGTKN = PLGPAGTKN and PLGLNGCOD = 'da'"
+							],
+							"columns": [
+								{
+									"name": "PAGPAGTKN",
+									"width": 50
+								},
+								{
+									"name": "PLGPROP_TITLE",
+									"from": "( jsonGetStr(PLGPROP, 'title') )",
+									"isTitle": true
+								},
+								{
+									"name": "PLGPROP_HEADER",
+									"from": "( jsonGetStr(PLGPROP, 'header') )",
+									"isTitle": true
+								},
+								{
+									"name": "PLGPROP___CID__",
+									"title": {
+										"da": "Type",
+										"en": "Type"
+									},
+									"from": "( jsonGetInt(PLGPROP, '__cid__') )",
+									"uitype": "pageType",
+									"width": 130
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Side",
+								"en": "Page"
+							},
+							"layout": {
+								"portlets": {
+									"index": 1,
+									"hidden": true
+								},
+								"pages": {
+									"index": 2
+								}
+							},
+							"columns": [
+								{
+									"name": "PAGPAGTKN"
+								},
+								{
+									"name": "PAGPROP"
+								},
+								{
+									"name": "PAGLAYOUT"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "PAGPAGTKN"
+										},
+										{
+											"name": "PAGPROP",
+											"hidden": true
+										},
+										{
+											"name": "PAGLAYOUT",
+											"hidden": true
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHSTCET00": {
+				"title": {
+					"da": "Staksider",
+					"en": "Stack Pages"
+				},
+				"cid": "LA",
+				"idColumn": "STCSTCTKN",
+				"keys": [
+					{
+						"primary": true,
+						"columns": [
+							"STCSTCTKN"
+						],
+						"name": "WSHSTCET01"
+					}
+				],
+				"columns": {
+					"STCSTCTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"STCPNTTKN": {
+						"title": {
+							"da": "Parent ID",
+							"en": "Parent ID"
+						},
+						"type": "integer"
+					},
+					"STCPROP": {
+						"title": {
+							"da": "Staksideinformationer",
+							"en": "Stack Page Information"
+						},
+						"type": "varchar(10000)",
+						"xpd": "stack"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "STCSTCTKN",
+									"width": 50
+								},
+								{
+									"name": "STCPNTTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "STCPROP_TOKEN",
+									"from": "( jsonGetStr(STCPROP, 'token') )",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "STCPROP_TITLE",
+									"from": "( jsonGetStr(STCPROP, 'title') )",
+									"isTitle": true,
+									"uitype": "i18n"
+								},
+								{
+									"name": "STCPROP_CID",
+									"from": "( jsonGetStr(STCPROP, 'cid') )",
+									"width": 200,
+									"uitype": "stackType"
+								},
+								{
+									"name": "STCPROP_SEQ",
+									"from": "( jsonGetNum(STCPROP, 'seq') )",
+									"width": 100
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Stak",
+								"en": "Stack"
+							},
+							"columns": [
+								{
+									"name": "STCSTCTKN"
+								},
+								{
+									"name": "STCPNTTKN"
+								},
+								{
+									"name": "STCPROP"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								},
+								"information": {
+									"title": {
+										"da": "Informationer",
+										"en": "Information"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Stakside",
+										"en": "Stack Page"
+									},
+									"columns": [
+										{
+											"name": "STCSTCTKN",
+											"group": "system"
+										},
+										{
+											"name": "STCPNTTKN",
+											"group": "system"
+										},
+										{
+											"name": "STCPROP",
+											"group": "information"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHITMET00": {
+				"title": {
+					"da": "Produkter",
+					"en": "Products"
+				},
+				"cid": "D",
+				"idColumn": "ITMITMTKN",
+				"columns": {
+					"ITMITMTKN": {
+						"title": {
+							"da": "Produkt",
+							"en": "Product"
+						},
+						"type": "integer"
+					},
+					"ITMIFMTKN": {
+						"title": {
+							"da": "Familie ID",
+							"en": "Family ID"
+						},
+						"type": "integer"
+					},
+					"ITMPROP": {
+						"title": {
+							"da": "Produktinformationer",
+							"en": "Product Information"
+						},
+						"ccsid": 0,
+						"type": "varchar(10000)",
+						"xpd": "product"
+					},
+					"ITMERPTKN": {
+						"title": {
+							"da": "ERP kode",
+							"en": "ERP Code"
+						},
+						"type": "varchar(64)"
+					}
+				},
+				"widgets": {
+					"product": {
+						"title": {
+							"en": "Product",
+							"da": "Produkt"
+						},
+						"name": "product",
+						"path": "/wsh-base/widgets/languagexpd.widget",
+						"dmd": "webshop.dmd",
+						"entity": "WSHILGET00",
+						"view": "portfolio",
+						"xpd": "product.xpd",
+						"propertyKey": "ILGPROP",
+						"fieldKey": "ITMITMTKN",
+						"foreignKey": "ILGLNGCOD",
+						"relationKey": "ILGITMTKN"
+					},
+					"productcatalog": {
+						"path": "/wsh-base/widgets/productcatalog.widget",
+						"name": "productcatalog",
+						"title": {
+							"da": "Katalog",
+							"en": "Catalog"
+						}
+					},
+					"productfamily": {
+						"path": "/wsh-base/widgets/productfamily.widget",
+						"name": "productfamily",
+						"title": {
+							"da": "Familier og relaterede",
+							"en": "Family and related"
+						}
+					}
+				},
+				"ui": {
+					"features": {
+						"preview": {
+							"src": "/wsh-base/widgets/urlPreview.widget",
+							"position": "right",
+							"embeded": "http://{0}/{1}/product/{2}",
+							"key": "ILGPROP_SEOURL",
+							"active": false,
+							"toolbar": {
+								"reload": true,
+								"sizes": {
+									"desktop": true,
+									"tablet": true,
+									"mobile": true
+								}
+							}
+						}
+					},
+					"grids": {
+						"portfolio": {
+							"features": {
+								"preview": {}
+							},
+							"materialized": true,
+							"from": [
+								"WSHITMET00 ",
+								"join WSHILGET00 on ITMITMTKN = ILGITMTKN and ILGLNGCOD = 'da' ",
+								"left join WSHNAMET00 on NAMNAMTKN = jsongetint(ILGPROP, 'manufacturer') ",
+								"and jsongetint(NAMPROP, '__cid__') = 1 ",
+								"and ITMITMTKN = ILGITMTKN ",
+								"and ILGLNGCOD = 'da' "
+							],
+							"sort": "ILGPROP_NAME, ILGPROP_ITEMNUMBER",
+							"columns": [
+								{
+									"name": "ITMITMTKN",
+									"title": {
+										"da": "ID",
+										"en": "ID"
+									},
+									"width": 50
+								},
+								{
+									"name": "ILGPROP_ITEMNUMBER",
+									"width": 130,
+									"from": "( cast (jsonGetStr(ILGPROP, 'itemnumber') as varchar(20)) )",
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_NAME",
+									"from": "( jsonGetStr(ILGPROP, 'name') )",
+									"isTitle": true,
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_TITLE",
+									"from": "( jsonGetStr(ILGPROP, 'title') )",
+									"hidden": true,
+									"xpd": "product"
+								},
+								{
+									"name": "NAMPROP_NAME",
+									"width": 200,
+									"from": "( cast (jsonGetStr(NAMPROP, 'name') as varchar(32)) )",
+									"title": {
+										"da": "Producent",
+										"en": "Manufacturer"
+									},
+									"xpd": "names"
+								},
+								{
+									"name": "ILGPROP_SEOURL",
+									"from": "( jsonGetStr(ILGPROP, 'seourl') )",
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_PUBDATE",
+									"from": "(cast ( jsonGetStr(ILGPROP, 'pubdate') as varchar(12) ) )",
+									"hidden": true,
+									"width": 130,
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_EXPIREDATE",
+									"from": "(cast ( jsonGetStr(ILGPROP, 'expiredate') as varchar(12) ) )",
+									"hidden": true,
+									"width": 130,
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_METATITLE",
+									"from": "( jsonGetStr(ILGPROP, 'metatitle') )",
+									"hidden": true,
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_METADESCRIPTION",
+									"from": "( jsonGetStr(ILGPROP, 'metadescription') )",
+									"hidden": true,
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_METAKEYWORDS",
+									"from": "( jsonGetStr(ILGPROP, 'metakeywords') )",
+									"hidden": true,
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_REMARK",
+									"from": "( jsonGetStr(ILGPROP, 'remark') )",
+									"hidden": true,
+									"xpd": "product"
+								},
+								{
+									"name": "ILGPROP_WEBACTIVE",
+									"from": "( itemWebActive (ITMITMTKN) )",
+									"hidden": true,
+									"width": 130,
+									"uitype": "webactivelanguage",
+									"xpd": "product"
+								}
+							]
+						},
+						"organizer": {
+							"from": [
+								"WSHITMET00 ",
+								"left join WSHILGET00 on ITMITMTKN = ILGITMTKN and ILGLNGCOD = 'da' ",
+								"left join WSHNAMET00 on NAMNAMTKN = jsongetint(ILGPROP, 'manufacturer') ",
+								"and jsongetint(NAMPROP, '__cid__') = 1 ",
+								"and ITMITMTKN = ILGITMTKN ",
+								"and ILGLNGCOD = 'da' "
+							],
+							"sort": "ITMITMTKN",
+							"columns": [
+								{
+									"name": "ITMITMTKN",
+									"width": 50
+								},
+								{
+									"name": "ILGPROP_NAME",
+									"from": [
+										"(CASE ",
+										"WHEN jsongetstr(ILGPROP, 'name') > '' ",
+										"THEN jsongetstr(ILGPROP, 'name') ",
+										"ELSE 'Ukendt' ",
+										"END)"
+									],
+									"xpd": "product",
+									"title": {
+										"da": "Navn",
+										"en": "Name"
+									},
+									"isTitle": true
+								}
+							]
+						},
+						"call2action": {
+							"from": [
+								"WSHITMET00 ",
+								"left join WSHILGET00 on ITMITMTKN = ILGITMTKN and ILGLNGCOD = 'da' ",
+								"left join WSHNAMET00 on NAMNAMTKN = jsongetint(ILGPROP, 'manufacturer') ",
+								"and jsongetint(NAMPROP, '__cid__') = 1 ",
+								"and ITMITMTKN = ILGITMTKN ",
+								"and ILGLNGCOD = 'da' "
+							],
+							"sort": "ITMITMTKN",
+							"columns": [
+								{
+									"name": "ITMITMTKN",
+									"width": 50
+								},
+								{
+									"name": "ILGPROP_NAME",
+									"from": [
+										"(CASE ",
+										"WHEN jsongetstr(ILGPROP, 'name') > '' ",
+										"THEN jsongetstr(ILGPROP, 'name') ",
+										"ELSE 'Ukendt' ",
+										"END)"
+									],
+									"isTitle": true,
+									"xpd": "product"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Produkt",
+								"en": "Product"
+							},
+							"layout": {
+								"portlets": {
+									"index": 1,
+									"hidden": true
+								},
+								"product": {
+									"index": 2
+								},
+								"productcatalog": {
+									"index": 3
+								},
+								"productfamily": {
+									"index": 4
+								},
+								"productparent": {
+									"index": 5
+								},
+								"RE13": {
+									"index": 6
+								}
+							},
+							"columns": [
+								{
+									"name": "ITMITMTKN"
+								},
+								{
+									"name": "ITMIFMTKN"
+								},
+								{
+									"name": "ITMPROP"
+								},
+								{
+									"name": "ITMERPTKN"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Produkt",
+										"en": "Product"
+									},
+									"columns": [
+										{
+											"name": "ITMITMTKN"
+										},
+										{
+											"name": "ITMIFMTKN"
+										},
+										{
+											"name": "ITMPROP",
+											"hidden": true,
+											"preventValidation": true
+										},
+										{
+											"name": "ITMERPTKN"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHCLNET00": {
+				"title": {
+					"da": "Klienter",
+					"en": "Clients"
+				},
+				"description": "OBS! Kan CLNDLV fjernes? Jeg har fjernet den fra grid views nu - den var ikke i form views",
+				"cid": "B",
+				"idColumn": "CLNCLNTKN",
+				"titleColumn": "CLNUSRNAM",
+				"columns": {
+					"CLNCLNTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"CLNUSRNAM": {
+						"title": {
+							"da": "Brugernavn",
+							"en": "User Name"
+						},
+						"type": "varchar(64)",
+						"isTitle": true
+					},
+					"CLNPWD": {
+						"title": {
+							"da": "Kodeord",
+							"en": "Password"
+						},
+						"type": "varchar(32)",
+						"uitype": "password"
+					},
+					"CLNBLL": {
+						"title": {
+							"da": "Fakturering",
+							"en": "Billing"
+						},
+						"xpd": "billing",
+						"type": "varchar(2048)",
+						"uitype": "xpd"
+					},
+					"CLNDLV": {
+						"title": {
+							"da": "Aflevering",
+							"en": "Delivery"
+						},
+						"xpd": "address",
+						"type": "varchar(2048)",
+						"uitype": "xpd"
+					},
+					"CLNERPTKN": {
+						"title": {
+							"da": "ERP kode",
+							"en": "ERP Code"
+						},
+						"type": "varchar(64)"
+					},
+					"CLNSTCMOD": {
+						"title": {
+							"da": "Strict Mode",
+							"en": "Strict Mode"
+						},
+						"type": "integer"
+					},
+					"CLNEML": {
+						"title": {
+							"da": "E-mail",
+							"en": "Email"
+						},
+						"isMandatory": true,
+						"ccsid": 0,
+						"type": "varchar(64)",
+						"vtype": "email"
+					},
+					"CLNSSC": {
+						"title": {
+							"da": "Abonnementer",
+							"en": "Subscriptions"
+						},
+						"xpd": "subscription",
+						"type": "varchar(1024)"
+					},
+					"CLNTYPXPD": {
+						"title": {
+							"da": "Klienttype",
+							"en": "Client Type"
+						},
+						"xpd": "clienttype",
+						"type": "varchar(1024)"
+					},
+					"CLNTYP": {
+						"title": {
+							"da": "Type",
+							"en": "Type"
+						},
+						"type": "varchar(64)",
+						"uitype": "enum",
+						"enum": "clienttype"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "CLNCLNTKN",
+									"width": 50
+								},
+								{
+									"name": "CLNUSRNAM"
+								},
+								{
+									"name": "CLNPWD",
+									"hidden": true,
+									"width": 200
+								},
+								{
+									"name": "CLNBLL_LASTLOGIN",
+									"from": "( cast (jsonGetStr(CLNBLL, 'lastlogin') as varchar(26)) )"
+								},
+								{
+									"name": "CLNTYP",
+									"hidden": true
+								},
+								{
+									"name": "CLNBLL_FULLNAME",
+									"from": "( cast (jsonGetStr(CLNBLL, 'fullname') as varchar(128)) )"
+								},
+								{
+									"name": "CLNBLL_COMPANY",
+									"from": "( cast (jsonGetStr(CLNBLL, 'company') as varchar(128)) )"
+								},
+								{
+									"name": "CLNEML"
+								},
+								{
+									"name": "CLNBLL_EMAIL",
+									"from": "( cast (jsonGetStr(CLNBLL, 'email') as varchar(64)) )",
+									"title": {
+										"da": "E-mail adresse (faktura)",
+										"en": "Email Address (billing)"
+									},
+									"hidden": true
+								},
+								{
+									"name": "CLNBLL_TELEPHONE",
+									"from": "( cast (jsonGetStr(CLNBLL, 'telephone') as varchar(128)) )",
+									"width": 200
+								},
+								{
+									"name": "CLNBLL_ADDRESS",
+									"from": "( cast (jsonGetStr(CLNBLL, 'address') as varchar(128)) )",
+									"hidden": true
+								},
+								{
+									"name": "CLNBLL_ADDRESS2",
+									"from": "( cast (jsonGetStr(CLNBLL, 'address2') as varchar(128)) )",
+									"hidden": true
+								},
+								{
+									"name": "CLNBLL_POSTCODE",
+									"from": "( cast (jsonGetStr(CLNBLL, 'postcode') as varchar(16)) )",
+									"hidden": true
+								},
+								{
+									"name": "CLNBLL_TOWN",
+									"from": "( cast (jsonGetStr(CLNBLL, 'town') as varchar(64)) )",
+									"hidden": true
+								},
+								{
+									"name": "CLNBLL_COUNTRY",
+									"from": "( cast (jsonGetStr(CLNBLL, 'country') as varchar(64)) )",
+									"enum": "countries",
+									"uitype": "enum",
+									"hidden": true
+								},
+								{
+									"name": "CLNSSC_NEWSLETTER",
+									"from": "( cast (jsonGetStr(CLNSSC, 'newsletter') as char(5)) )",
+									"width": 130
+								},
+								{
+									"name": "CLNERPTKN",
+									"hidden": true,
+									"width": 130
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Klient",
+								"en": "Client"
+							},
+							"columns": [
+								{
+									"name": "CLNCLNTKN",
+									"group": "system"
+								},
+								{
+									"name": "CLNUSRNAM",
+									"width": 500,
+									"group": "account"
+								},
+								{
+									"name": "CLNPWD",
+									"group": "account",
+									"width": 300
+								},
+								{
+									"name": "CLNERPTKN",
+									"group": "account"
+								},
+								{
+									"name": "CLNSTCMOD",
+									"hidden": true,
+									"group": "account"
+								},
+								{
+									"name": "CLNEML",
+									"width": 500,
+									"group": "account"
+								},
+								{
+									"name": "CLNTYP",
+									"group": "account",
+									"hidden": true
+								},
+								{
+									"name": "CLNTYPXPD",
+									"width": 500,
+									"group": "account"
+								},
+								{
+									"name": "CLNSSC",
+									"group": "account"
+								},
+								{
+									"name": "CLNBLL"
+								}
+							],
+							"layout": {
+								"portlets": {
+									"index": 1
+								},
+								"RE01": {
+									"index": 2,
+									"view": "clientbaskets"
+								},
+								"RE11": {
+									"index": 3,
+									"view": "clientfavorites"
+								}
+							},
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									},
+									"index": 1
+								},
+								"account": {
+									"title": {
+										"da": "Konto",
+										"en": "Account"
+									},
+									"index": 2
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Klientoplysninger",
+										"en": "Client Information"
+									},
+									"columns": [
+										{
+											"name": "CLNCLNTKN"
+										},
+										{
+											"name": "CLNSTCMOD"
+										},
+										{
+											"name": "CLNUSRNAM"
+										},
+										{
+											"name": "CLNPWD"
+										},
+										{
+											"name": "CLNEML"
+										},
+										{
+											"name": "CLNTYP"
+										},
+										{
+											"name": "CLNTYPXPD"
+										},
+										{
+											"name": "CLNERPTKN"
+										},
+										{
+											"name": "CLNSSC"
+										},
+										{
+											"name": "CLNBLL"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHFRMET00": {
+				"title": {
+					"da": "Formularindstillinger",
+					"en": "Form setup"
+				},
+				"cid": "AC",
+				"idColumn": "FRMFRMTKN",
+				"titleColumn": "FRMITMNAM",
+				"columns": {
+					"FRMFRMTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"FRMITMNAM": {
+						"title": {
+							"da": "Navn",
+							"en": "Name"
+						},
+						"type": "varchar(512)",
+						"isTitle": true
+					},
+					"FRMSUBHDR": {
+						"title": {
+							"da": "Undertitel",
+							"en": "Sub Title"
+						},
+						"type": "varchar(512)"
+					},
+					"FRMPATH": {
+						"title": {
+							"da": "Sti",
+							"en": "Path"
+						},
+						"type": "varchar(512)"
+					},
+					"FRMPGMLST": {
+						"title": {
+							"da": "Programer der skal eksekveres",
+							"en": "Programs that will be executed"
+						},
+						"type": "varchar(4096)",
+						"uitype": "json"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "FRMFRMTKN",
+									"width": 50
+								},
+								{
+									"name": "FRMITMNAM",
+									"isTitle": true
+								},
+								{
+									"name": "FRMSUBHDR",
+									"hidden": true
+								},
+								{
+									"name": "FRMPATH"
+								},
+								{
+									"name": "FRMPGMLST",
+									"hidden": true
+								}
+							]
+						},
+						"call2action": {
+							"columns": [
+								{
+									"name": "FRMFRMTKN",
+									"width": 50
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Formular",
+								"en": "Form"
+							},
+							"columns": [
+								{
+									"name": "FRMFRMTKN",
+									"group": "system"
+								},
+								{
+									"name": "FRMITMNAM",
+									"group": "system",
+									"width": 500
+								},
+								{
+									"name": "FRMSUBHDR",
+									"group": "system",
+									"width": 500
+								},
+								{
+									"name": "FRMPATH",
+									"group": "details",
+									"width": 500
+								},
+								{
+									"name": "FRMPGMLST",
+									"uitype": "json",
+									"group": "details",
+									"width": "100%",
+									"height": 200
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								},
+								"details": {
+									"title": {
+										"da": "Formdetaljer",
+										"en": "Form Details"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Form",
+										"en": "Form"
+									},
+									"columns": [
+										{
+											"name": "FRMFRMTKN"
+										},
+										{
+											"name": "FRMITMNAM"
+										},
+										{
+											"name": "FRMSUBHDR"
+										},
+										{
+											"name": "FRMPATH"
+										},
+										{
+											"name": "FRMPGMLST"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHPLBET00": {
+				"title": {
+					"da": "Produktmærker",
+					"en": "Product Labels"
+				},
+				"cid": "AI",
+				"idColumn": "PLBPLBTKN",
+				"titleColumn": "PLBTITLE",
+				"columns": {
+					"PLBPLBTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"PLBTITLE": {
+						"title": {
+							"da": "Navn",
+							"en": "Name"
+						},
+						"type": "varchar(512)",
+						"uitype": "i18n"
+					},
+					"PLBTYPE": {
+						"title": {
+							"da": "Type",
+							"en": "Type"
+						},
+						"type": "varchar(512)",
+						"enum": "productlabel",
+						"uitype": "enum"
+					},
+					"PLBLINK": {
+						"title": {
+							"da": "Link",
+							"en": "Link"
+						},
+						"type": "varchar(128)"
+					},
+					"PLBIMG": {
+						"title": {
+							"da": "Billede",
+							"en": "Image"
+						},
+						"type": "varchar(128)"
+					},
+					"PLBERPTKN": {
+						"title": {
+							"da": "ERP kode",
+							"en": "ERP Code"
+						},
+						"type": "varchar(64)"
+					},
+					"PLBDESC": {
+						"title": {
+							"da": "Beskrivelse",
+							"en": "Description"
+						},
+						"type": "varchar(10000)",
+						"uitype": "i18n"
+					},
+					"PLBPROP": {
+						"title": {
+							"da": "Produktmærke",
+							"en": "Product Label"
+						},
+						"xpd": "productlabel",
+						"type": "varchar(10000)"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "PLBPLBTKN",
+									"width": 50
+								},
+								{
+									"name": "PLBTITLE"
+								},
+								{
+									"name": "PLBTYPE"
+								},
+								{
+									"name": "PLBLINK",
+									"hidden": true
+								},
+								{
+									"name": "PLBIMG",
+									"hidden": true
+								},
+								{
+									"name": "PLBDESC"
+								},
+								{
+									"name": "PLBERPTKN",
+									"width": 130,
+									"hidden": true
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Produktmærke",
+								"en": "Product Label"
+							},
+							"columns": [
+								{
+									"name": "PLBPLBTKN"
+								},
+								{
+									"name": "PLBTITLE"
+								},
+								{
+									"name": "PLBTYPE"
+								},
+								{
+									"name": "PLBLINK"
+								},
+								{
+									"name": "PLBIMG"
+								},
+								{
+									"name": "PLBDESC"
+								},
+								{
+									"name": "PLBERPTKN"
+								},
+								{
+									"name": "PLBPROP"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "PLBPLBTKN",
+											"hidden": true
+										},
+										{
+											"name": "PLBTITLE",
+											"hidden": true
+										},
+										{
+											"name": "PLBTYPE",
+											"hidden": true
+										},
+										{
+											"name": "PLBLINK",
+											"hidden": true
+										},
+										{
+											"name": "PLBIMG",
+											"hidden": true
+										},
+										{
+											"name": "PLBDESC",
+											"hidden": true
+										},
+										{
+											"name": "PLBERPTKN",
+											"hidden": true
+										},
+										{
+											"name": "PLBPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHCURET00": {
+				"title": {
+					"da": "Transportører",
+					"en": "Couriers"
+				},
+				"cid": "AG",
+				"idColumn": "CURCURTKN",
+				"titleColumn": "CURNAME",
+				"columns": {
+					"CURCURTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"CURCURCDE": {
+						"title": {
+							"da": "Transportør",
+							"en": "Courier"
+						},
+						"type": "varchar(64)"
+					},
+					"CURNAME": {
+						"title": {
+							"da": "Navn",
+							"en": "Name"
+						},
+						"type": "varchar(128)"
+					},
+					"CURDESC": {
+						"title": {
+							"da": "Beskrivelse",
+							"en": "Description"
+						},
+						"type": "varchar(140)"
+					},
+					"CURLOGO": {
+						"title": {
+							"da": "Logo",
+							"en": "Logo"
+						},
+						"type": "varchar(256)"
+					},
+					"CURSEQ": {
+						"title": {
+							"da": "Sekvens",
+							"en": "Sequence"
+						},
+						"type": "integer"
+					},
+					"CURCNTRY": {
+						"title": {
+							"da": "Land",
+							"en": "Country"
+						},
+						"type": "varchar(32)",
+						"enum": "countries",
+						"uitype": "enum"
+					},
+					"CURPROP": {
+						"title": {
+							"da": "Transportør",
+							"en": "Courier"
+						},
+						"xpd": "courier",
+						"type": "varchar(512)"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "CURCURTKN",
+									"width": 50
+								},
+								{
+									"name": "CURCURCDE",
+									"isTitle": true,
+									"width": 200,
+									"enum": "couriers",
+									"uitype": "enum"
+								},
+								{
+									"name": "CURNAME"
+								},
+								{
+									"name": "CURDESC"
+								},
+								{
+									"name": "CURCNTRY",
+									"width": 200
+								},
+								{
+									"name": "CURLOGO",
+									"hidden": true
+								},
+								{
+									"name": "CURSEQ",
+									"width": 130
+								}
+							]
+						},
+						"comboText": {
+							"sort": "CURNAME",
+							"columns": [
+								{
+									"name": "CURCURTKN"
+								},
+								{
+									"name": "CURNAME",
+									"isTitle": true
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Transportør",
+								"en": "Courier"
+							},
+							"columns": [
+								{
+									"name": "CURCURTKN"
+								},
+								{
+									"name": "CURCURCDE"
+								},
+								{
+									"name": "CURNAME"
+								},
+								{
+									"name": "CURDESC"
+								},
+								{
+									"name": "CURLOGO"
+								},
+								{
+									"name": "CURSEQ"
+								},
+								{
+									"name": "CURCNTRY"
+								},
+								{
+									"name": "CURPROP"
+								}
+							],
+							"layout": {
+								"portlets": {
+									"index": 0,
+									"hidden": true
+								},
+								"CURPROP": {
+									"index": 1
+								},
+								"RE10": {
+									"index": 2,
+									"view": "courierprices"
+								}
+							},
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "CURCURTKN"
+										},
+										{
+											"name": "CURCURCDE"
+										},
+										{
+											"name": "CURNAME"
+										},
+										{
+											"name": "CURDESC"
+										},
+										{
+											"name": "CURLOGO"
+										},
+										{
+											"name": "CURSEQ"
+										},
+										{
+											"name": "CURCNTRY"
+										},
+										{
+											"name": "CURPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHCRPET00": {
+				"title": {
+					"da": "Fragtpriser",
+					"en": "Freight prices"
+				},
+				"description": "OBS! Der skal kigges på services og hvornår og hvordan der bruges CPRPROP og hvornår det er DMD felter",
+				"cid": "AB",
+				"idColumn": "CRPCRPTKN",
+				"titleColumn": "CRPPROP_TITLE",
+				"columns": {
+					"CRPCRPTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"CRPCURTKN": {
+						"title": {
+							"da": "Transportørkode",
+							"en": "Courier Code"
+						},
+						"type": "integer"
+					},
+					"CRPPROP": {
+						"title": {
+							"da": "Fragtoplysninger og priser",
+							"en": "Freight information and prices"
+						},
+						"type": "varchar(4096)",
+						"xpd": "courierprices"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "CRPCRPTKN",
+									"width": 50
+								},
+								{
+									"name": "CURCURCDE",
+									"from": "WSHCURRE10",
+									"title": {
+										"da": "Transportør",
+										"en": "Courier"
+									},
+									"width": 200,
+									"enum": "couriers",
+									"uitype": "enum"
+								},
+								{
+									"name": "CRPPROP_DESCRIPTION",
+									"from": "( jsonGetStr(CRPPROP, 'description') )"
+								},
+								{
+									"name": "CURCNTRY",
+									"from": "WSHCURRE10",
+									"title": {
+										"da": "Land",
+										"en": "Country"
+									},
+									"width": 200,
+									"enum": "countries",
+									"uitype": "enum"
+								},
+								{
+									"name": "CRPPROP_WEIGHT",
+									"from": "( jsonGetStr(CRPPROP, 'weight') )",
+									"width": 130
+								},
+								{
+									"name": "CRPPROP_PRICE",
+									"from": "( jsonGetStr(CRPPROP, 'price') )",
+									"width": 130
+								},
+								{
+									"name": "CRPPROP_FEE",
+									"from": "( jsonGetStr(CRPPROP, 'fee') )",
+									"width": 130
+								},
+								{
+									"name": "CRPPROP_FREECHARGE",
+									"from": "( jsonGetStr(CRPPROP, 'freecharge') )",
+									"width": 130
+								},
+								{
+									"name": "CRPPROP_TITLE",
+									"from": "( jsonGetStr(CRPPROP, 'title') )",
+									"hidden": true
+								}
+							]
+						},
+						"comboText": {
+							"sort": "CRPPROP_TITLE",
+							"columns": [
+								{
+									"name": "CRPCRPTKN"
+								},
+								{
+									"name": "CRPPROP_TITLE",
+									"from": "( jsonGetStr(CRPPROP, 'title') )",
+									"isTitle": true
+								}
+							]
+						},
+						"courierprices": {
+							"columns": [
+								{
+									"name": "CRPCRPTKN",
+									"width": 50
+								},
+								{
+									"name": "CURCURCDE",
+									"from": "WSHCURRE10",
+									"width": 200,
+									"enum": "couriers",
+									"uitype": "enum"
+								},
+								{
+									"name": "CRPPROP_DESCRIPTION",
+									"from": "( jsonGetStr(CRPPROP, 'description') )"
+								},
+								{
+									"name": "CURCNTRY",
+									"from": "WSHCURRE10",
+									"width": 200,
+									"enum": "countries",
+									"uitype": "enum"
+								},
+								{
+									"name": "CRPPROP_WEIGHT",
+									"from": "( jsonGetStr(CRPPROP, 'weight') )",
+									"width": 130,
+									"hidden": true
+								},
+								{
+									"name": "CRPPROP_PRICE",
+									"from": "( jsonGetStr(CRPPROP, 'price') )",
+									"width": 130,
+									"hidden": true
+								},
+								{
+									"name": "CRPPROP_FEE",
+									"from": "( jsonGetStr(CRPPROP, 'fee') )",
+									"width": 130,
+									"hidden": true
+								},
+								{
+									"name": "CRPPROP_FREECHARGE",
+									"from": "( jsonGetStr(CRPPROP, 'freecharge') )",
+									"width": 130,
+									"hidden": true
+								},
+								{
+									"name": "CRPPROP_TITLE",
+									"from": "( jsonGetStr(CRPPROP, 'title') )",
+									"hidden": true
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Fragtpris",
+								"en": "Freight Price"
+							},
+							"columns": [
+								{
+									"name": "CRPCRPTKN"
+								},
+								{
+									"name": "CRPCURTKN"
+								},
+								{
+									"name": "CRPPROP"
+								}
+							],
+							"layout": {
+								"portlets": {
+									"index": 0,
+									"hidden": true
+								},
+								"CRPPROP": {
+									"index": 1
+								}
+							},
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "CRPCRPTKN"
+										},
+										{
+											"name": "CRPCURTKN"
+										},
+										{
+											"name": "CRPPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHNAMET00": {
+				"title": {
+					"da": "Navne",
+					"en": "Names"
+				},
+				"cid": "J",
+				"idColumn": "NAMNAMTKN",
+				"titleColumn": "NAMPROP_NAME",
+				"keys": [
+					{
+						"primary": true,
+						"columns": [
+							"NAMNAMTKN"
+						],
+						"name": "WSHNAMET01"
+					}
+				],
+				"columns": {
+					"NAMNAMTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"NAMPNTTKN": {
+						"title": {
+							"da": "Parent ID",
+							"en": "Parent ID"
+						},
+						"type": "integer"
+					},
+					"NAMPROP": {
+						"title": {
+							"da": "Navninformationer",
+							"en": "Name Information"
+						},
+						"xpd": "names",
+						"type": "varchar(2048)",
+						"uitype": "xpd"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"sort": "NAMPROP_NAME",
+							"columns": [
+								{
+									"name": "NAMNAMTKN",
+									"width": 50
+								},
+								{
+									"name": "NAMPNTTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "NAMPROP_NAME",
+									"from": "( cast (jsonGetStr(NAMPROP, 'name') as varchar(128)) )",
+									"uitype": "i18n",
+									"isTitle": true
+								},
+								{
+									"name": "NAMPROP___CID__",
+									"from": "( jsonGetInt(NAMPROP, '__cid__') )",
+									"title": {
+										"da": "Type",
+										"en": "Type"
+									},
+									"width": 130,
+									"uitype": "nameType"
+								},
+								{
+									"name": "NAMPROP_SEQ",
+									"from": "( cast (jsonGetStr(NAMPROP, 'seq') as varchar(20)) )",
+									"width": 130
+								}
+							]
+						},
+						"comboText": {
+							"sort": "NAMPROP_NAME",
+							"columns": [
+								{
+									"name": "NAMNAMTKN"
+								},
+								{
+									"name": "NAMPROP___CID__",
+									"from": "( jsonGetNum(NAMPROP, '__cid__') )"
+								},
+								{
+									"name": "NAMPROP_NAME",
+									"from": "( jsonGetStr(NAMPROP , 'name.' concat envStr('LANGUAGE','da' )) )",
+									"isTitle": true
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Navn",
+								"en": "Name"
+							},
+							"columns": [
+								{
+									"name": "NAMNAMTKN"
+								},
+								{
+									"name": "NAMPNTTKN"
+								},
+								{
+									"name": "NAMPROP"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Navn",
+										"en": "Name"
+									},
+									"columns": [
+										{
+											"name": "NAMNAMTKN",
+											"group": "system"
+										},
+										{
+											"name": "NAMPNTTKN",
+											"readOnly": true,
+											"group": "system"
+										},
+										{
+											"name": "NAMPROP",
+											"group": "system"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHFLDET00": {
+				"title": {
+					"da": "Foldere",
+					"en": "Folders"
+				},
+				"cid": "C",
+				"idColumn": "FLDFLDTKN",
+				"titleColumn": "FLDPROP_TITLE",
+				"REM": "TODO !! Hvorfor lave du en KEYS - den har allereden idColoumn",
+				"keys": [
+					{
+						"primary": true,
+						"columns": [
+							"FLDFLDTKN"
+						],
+						"name": "WSHFLDET01"
+					}
+				],
+				"columns": {
+					"FLDFLDTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"FLDPNTTKN": {
+						"title": {
+							"da": "Parent ID",
+							"en": "Parent ID"
+						},
+						"type": "integer"
+					},
+					"FLDPROP": {
+						"title": {
+							"en": "Folderoplysninger",
+							"da": "Folder Information"
+						},
+						"xpd": "folder",
+						"type": "varchar(2048)"
+					},
+					"FLDERPTKN": {
+						"title": {
+							"en": "ERP kode",
+							"da": "ERP Code"
+						},
+						"type": "varchar(64)"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "FLDFLDTKN",
+									"width": 50
+								},
+								{
+									"name": "FLDPROP_TITLE",
+									"from": "( jsonGetStr(FLDPROP, 'title') )",
+									"uitype": "i18n",
+									"isTitle": true
+								},
+								{
+									"name": "FLDPROP___CID__",
+									"from": "( jsonGetInt(FLDPROP, '__cid__') )",
+									"width": 130,
+									"title": {
+										"da": "Type",
+										"en": "Type"
+									},
+									"uitype": "folderType"
+								},
+								{
+									"name": "FLDPROP_IMAGE",
+									"from": "( jsonGetStr(FLDPROP, 'image') )",
+									"hidden": true
+								},
+								{
+									"name": "FLDPROP_SEQ",
+									"from": "( jsonGetStr(FLDPROP, 'seq') )",
+									"width": 130
+								},
+								{
+									"name": "FLDPROP",
+									"hidden": true
+								},
+								{
+									"name": "FLDERPTKN",
+									"width": 130,
+									"hidden": true
+								}
+							]
+						},
+						"comboText": {
+							"sort": "FLDPROP_TITLE",
+							"columns": [
+								{
+									"name": "FLDFLDTKN"
+								},
+								{
+									"name": "FLDPROP___CID__",
+									"from": "( jsonGetInt(FLDPROP, '__cid__') )"
+								},
+								{
+									"name": "FLDPROP_TITLE",
+									"from": "( jsonGetStr(fldProp , 'title.' concat envStr('LANGUAGE','da' )) )",
+									"isTitle": true
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Folder",
+								"en": "Folder"
+							},
+							"columns": [
+								{
+									"name": "FLDFLDTKN"
+								},
+								{
+									"name": "FLDPNTTKN"
+								},
+								{
+									"name": "FLDPROP"
+								},
+								{
+									"name": "FLDERPTKN"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Folderoplysninger",
+										"en": "Folder Information"
+									},
+									"columns": [
+										{
+											"name": "FLDFLDTKN",
+											"group": "system"
+										},
+										{
+											"name": "FLDPNTTKN",
+											"group": "system"
+										},
+										{
+											"name": "FLDERPTKN",
+											"group": "system"
+										},
+										{
+											"name": "FLDPROP",
+											"group": "system"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHFLIET00": {
+				"title": {
+					"da": "Favoritlister",
+					"en": "Favorites List"
+				},
+				"permission": {
+					"add": {
+						"form": false,
+						"grid": false
+					},
+					"edit": {
+						"grid": false,
+						"form": false
+					},
+					"remove": {
+						"grid": false,
+						"form": false
+					}
+				},
+				"cid": "AD",
+				"idColumn": "FLIFLITKN",
+				"columns": {
+					"FLIFLITKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"FLICLNTKN": {
+						"title": {
+							"da": "Klient ID",
+							"en": "Client ID"
+						},
+						"type": "integer"
+					},
+					"FLISTS": {
+						"title": {
+							"da": "Status",
+							"en": "Status"
+						},
+						"type": "integer",
+						"enum": "basketstatus",
+						"uitype": "enum"
+					},
+					"FLINAME": {
+						"title": {
+							"da": "Navn",
+							"en": "Name"
+						},
+						"isTitle": true,
+						"type": "varchar(64)"
+					},
+					"FLIDATECRT": {
+						"title": {
+							"da": "Oprettet",
+							"en": "Created"
+						},
+						"type": "timestamp",
+						"uitype": "isotimestamp"
+					},
+					"FLIDATECHG": {
+						"title": {
+							"da": "Ændret",
+							"en": "Changed"
+						},
+						"type": "timestamp",
+						"uitype": "isotimestamp"
+					},
+					"FLISTO": {
+						"title": {
+							"da": "Store",
+							"en": "Store"
+						},
+						"type": "varchar(25000)",
+						"uitype": "basketItems"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "FLIFLITKN",
+									"width": 50
+								},
+								{
+									"name": "FLICLNTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "CLNUSRNAM",
+									"from": "WSHCLNRE11",
+									"title": {
+										"da": "Brugernavn",
+										"en": "User Name"
+									}
+								},
+								{
+									"name": "FLINAME"
+								},
+								{
+									"name": "FLIDATECRT"
+								},
+								{
+									"name": "FLIDATECHG"
+								},
+								{
+									"name": "FLISTO",
+									"hidden": true
+								},
+								{
+									"name": "FLISTS",
+									"width": 130
+								}
+							]
+						},
+						"clientfavorites": {
+							"columns": [
+								{
+									"name": "FLIFLITKN",
+									"width": 50
+								},
+								{
+									"name": "FLICLNTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "FLINAME"
+								},
+								{
+									"name": "FLIDATECRT"
+								},
+								{
+									"name": "FLIDATECHG"
+								},
+								{
+									"name": "FLISTO",
+									"hidden": true
+								},
+								{
+									"name": "FLISTS",
+									"width": 130
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Favoritliste",
+								"en": "Favorite List"
+							},
+							"columns": [
+								{
+									"name": "FLIFLITKN"
+								},
+								{
+									"name": "FLICLNTKN"
+								},
+								{
+									"name": "FLISTS"
+								},
+								{
+									"name": "FLINAME"
+								},
+								{
+									"name": "FLIDATECRT"
+								},
+								{
+									"name": "FLIDATECHG"
+								},
+								{
+									"name": "FLISTO"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Favoritliste oplysninger",
+										"en": "Favorite List Information"
+									},
+									"columns": [
+										{
+											"name": "FLIFLITKN"
+										},
+										{
+											"name": "FLINAME",
+											"width": 400
+										},
+										{
+											"name": "FLICLNTKN",
+											"width": 400
+										},
+										{
+											"name": "FLIDATECRT",
+											"width": 300
+										},
+										{
+											"name": "FLIDATECHG",
+											"width": 300
+										},
+										{
+											"name": "FLISTS",
+											"width": 300
+										},
+										{
+											"name": "FLISTO",
+											"disabled": true
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHFAVET00": {
+				"title": {
+					"da": "Favoritter",
+					"en": "Favorites"
+				},
+				"description": "OBS! favorite.xpd findes ikke!!",
+				"cid": "AA",
+				"idColumn": "FAVFAVTKN",
+				"keys": [
+					{
+						"primary": true,
+						"columns": [
+							"FAVFAVTKN"
+						],
+						"name": "WSHFAVET01"
+					}
+				],
+				"columns": {
+					"FAVFAVTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"FAVPNTTKN": {
+						"title": {
+							"da": "Parent ID",
+							"en": "Parent ID"
+						},
+						"type": "integer"
+					},
+					"FAVPROP": {
+						"title": {
+							"da": "Favoritindhold",
+							"en": "Favorite Content"
+						},
+						"type": "varchar(2048)"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "FAVFAVTKN",
+									"width": 50
+								},
+								{
+									"name": "FAVPNTTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "FAVPROP"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Favorit",
+								"en": "Favorite"
+							},
+							"columns": [
+								{
+									"name": "FAVFAVTKN"
+								},
+								{
+									"name": "FAVPNTTKN"
+								},
+								{
+									"name": "FAVPROP"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								},
+								"information": {
+									"title": {
+										"da": "Informationer",
+										"en": "Information"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Favoritliste",
+										"en": "Favorite"
+									},
+									"columns": [
+										{
+											"name": "FAVFAVTKN",
+											"group": "system"
+										},
+										{
+											"name": "FAVPNTTKN",
+											"group": "system"
+										},
+										{
+											"name": "FAVPROP",
+											"group": "system",
+											"width": 600
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHWHIET00": {
+				"title": {
+					"da": "Lagre",
+					"en": "Warehouses"
+				},
+				"description": "OBS! This is a not fully made entity - talk it over now we can",
+				"cid": "AD",
+				"idColumn": "WHIWHITKN",
+				"titleColumn": "WHITITLE",
+				"columns": {
+					"WHIWHITKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"WHITITLE": {
+						"title": {
+							"da": "Navn",
+							"en": "Name"
+						},
+						"type": "varchar(64)",
+						"length": 64,
+						"isTitle": true
+					},
+					"WHIPROP": {
+						"title": {
+							"da": "Egenskaber",
+							"en": "Properties"
+						},
+						"type": "varchar(32000)",
+						"xpd": "warehouse"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "WHIWHITKN",
+									"width": 50
+								},
+								{
+									"name": "WHITITLE",
+									"isTitle": true
+								},
+								{
+									"name": "WHIPROP_ADDRESS",
+									"from": "( cast (jsonGetStr(WHIPROP, 'address') as varchar(128)) )"
+								},
+								{
+									"name": "WHIPROP_ZIPCODE",
+									"from": "( cast (jsonGetStr(WHIPROP, 'zipcode') as varchar(128)) )"
+								},
+								{
+									"name": "WHIPROP_CITY",
+									"from": "( cast (jsonGetStr(WHIPROP, 'city') as varchar(128)) )"
+								},
+								{
+									"name": "WHIPROP_COUNTRY",
+									"from": "( cast (jsonGetStr(WHIPROP, 'country') as varchar(128)) )"
+								},
+								{
+									"name": "WHIPROP_PHONE",
+									"from": "( cast (jsonGetStr(WHIPROP, 'phone') as varchar(20)) )"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Lager",
+								"en": "Warehouse"
+							},
+							"columns": [
+								{
+									"name": "WHIWHITKN"
+								},
+								{
+									"name": "WHITITLE"
+								},
+								{
+									"name": "WHIPROP"
+								}
+							],
+							"layout": {
+								"portlets": {
+									"index": 0,
+									"hidden": true
+								},
+								"WHIPROP": {
+									"index": 1,
+									"title": {
+										"da": "Lager",
+										"en": "Warehouse"
+									}
+								},
+								"RE12": {
+									"index": 2,
+									"view": "warehousestock"
+								}
+							},
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "WHIWHITKN"
+										},
+										{
+											"name": "WHITITLE"
+										},
+										{
+											"name": "WHIPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHSLVET00": {
+				"title": {
+					"da": "Lagerbeholdning",
+					"en": "Stock"
+				},
+				"cid": "LB",
+				"idColumn": "SLVSLVTKN",
+				"titleColumn": "SLVSLVTKN",
+				"columns": {
+					"SLVSLVTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"SLVITMTKN": {
+						"title": {
+							"da": "Produkt ID",
+							"en": "Product ID"
+						},
+						"type": "integer"
+					},
+					"SLVWHITKN": {
+						"title": {
+							"da": "Lager ID",
+							"en": "Warehouse ID"
+						},
+						"type": "integer"
+					},
+					"SLVQTY": {
+						"title": {
+							"da": "Beholdning",
+							"en": "Stock"
+						},
+						"type": "integer"
+					},
+					"SLVPROP": {
+						"title": {
+							"da": "Lager beholdning",
+							"en": "Stock Level"
+						},
+						"type": "varchar(10000)",
+						"xpd": "stocklevel"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"from": [
+								"WSHSLVET00 ",
+								"left join WSHILGET00 on SLVITMTKN = ILGITMTKN and ILGLNGCOD = 'da' ",
+								"left join WSHWHIET00 wshwhire12 on SLVWHITKN = WHIWHITKN"
+							],
+							"sort": "SLVITMTKN",
+							"columns": [
+								{
+									"name": "SLVSLVTKN",
+									"width": 50
+								},
+								{
+									"name": "SLVITMTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "SLVWHITKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "ILGPROP_TITLE",
+									"from": "( jsonGetStr(ILGPROP, 'title') )",
+									"title": {
+										"da": "Produkt",
+										"en": "Product"
+									},
+									"isTitle": true
+								},
+								{
+									"name": "WHITITLE",
+									"from": "WSHWHIRE12",
+									"title": {
+										"da": "Lager",
+										"en": "Warehouse"
+									}
+								},
+								{
+									"name": "SLVQTY",
+									"width": 130
+								},
+								{
+									"name": "SLVPROP",
+									"hidden": true
+								}
+							]
+						},
+						"warehousestock": {
+							"columns": [
+								{
+									"name": "SLVSLVTKN",
+									"width": 50
+								},
+								{
+									"name": "SLVITMTKN",
+									"hidden": true
+								},
+								{
+									"name": "SLVWHITKN",
+									"hidden": true
+								},
+								{
+									"name": "SLVQTY",
+									"width": 100
+								},
+								{
+									"name": "WHITITLE",
+									"from": "WSHWHIRE12",
+									"title": {
+										"da": "Lager",
+										"en": "Warehouse"
+									}
+								},
+								{
+									"name": "SLVPROP",
+									"hidden": true
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Lagerbeholdning",
+								"en": "Stock"
+							},
+							"layout": {
+								"portlets": {
+									"index": 1,
+									"hidden": true
+								},
+								"SLVPROP": {
+									"index": 2
+								}
+							},
+							"columns": [
+								{
+									"name": "SLVSLVTKN"
+								},
+								{
+									"name": "SLVITMTKN"
+								},
+								{
+									"name": "SLVWHITKN"
+								},
+								{
+									"name": "SLVQTY"
+								},
+								{
+									"name": "SLVPROP"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "SLVSLVTKN"
+										},
+										{
+											"name": "SLVITMTKN"
+										},
+										{
+											"name": "SLVWHITKN"
+										},
+										{
+											"name": "SLVQTY"
+										},
+										{
+											"name": "SLVPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHDLVET00": {
+				"title": {
+					"da": "Leveringsadresser",
+					"en": "Delivery Addresses"
+				},
+				"cid": "AJ",
+				"idColumn": "DLVDLVTKN",
+				"titleColumn": "DLVDLV_FULLNAME",
+				"columns": {
+					"DLVDLVTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"DLVCLNTKN": {
+						"title": {
+							"da": "Klient ID",
+							"en": "Client ID"
+						},
+						"type": "integer"
+					},
+					"DLVDLV": {
+						"title": {
+							"da": "Leveringsadresse oplysninger",
+							"en": "Delivery Address Information"
+						},
+						"xpd": "address",
+						"type": "varchar(2048)"
+					},
+					"DLVUSEDTS": {
+						"title": {
+							"da": "Sidst brugt",
+							"en": "Last used"
+						},
+						"type": "timestamp",
+						"uitype": "isotimestamp"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "DLVDLVTKN",
+									"width": 50
+								},
+								{
+									"name": "DLVCLNTKN",
+									"hidden": true,
+									"width": 80
+								},
+								{
+									"name": "DLVDLV_COMPANY",
+									"from": "( jsonGetStr(DLVDLV, 'company') )"
+								},
+								{
+									"name": "DLVDLV_FULLNAME",
+									"from": "( jsonGetStr(DLVDLV, 'fullname') )",
+									"isTitle": true
+								},
+								{
+									"name": "DLVDLV_ADDRESS",
+									"from": "( jsonGetStr(DLVDLV, 'address') )"
+								},
+								{
+									"name": "DLVDLV_ADDRESS2",
+									"from": "( jsonGetStr(DLVDLV, 'address2') )"
+								},
+								{
+									"name": "DLVDLV_POSTCODE",
+									"from": "( jsonGetStr(DLVDLV, 'postcode') )"
+								},
+								{
+									"name": "DLVDLV_TOWN",
+									"from": "( jsonGetStr(DLVDLV, 'town') )"
+								},
+								{
+									"name": "DLVDLV_COUNTRY",
+									"from": "( jsonGetStr(DLVDLV, 'country') )"
+								},
+								{
+									"name": "DLVDLV_TELEPHONE",
+									"from": "( jsonGetStr(DLVDLV, 'telephone') )"
+								},
+								{
+									"name": "DLVDLV_REFERENCE",
+									"from": "( jsonGetStr(DLVDLV, 'reference') )"
+								},
+								{
+									"name": "DLVUSEDTS"
+								},
+								{
+									"name": "DLVDLV",
+									"hidden": true
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Leveringsadresse",
+								"en": "Delivery addresses"
+							},
+							"columns": [
+								{
+									"name": "DLVDLVTKN"
+								},
+								{
+									"name": "DLVCLNTKN"
+								},
+								{
+									"name": "DLVDLV"
+								},
+								{
+									"name": "DLVUSEDTS"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								},
+								"information": {
+									"title": {
+										"da": "Informationer",
+										"en": "Information"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "DLVDLVTKN",
+											"group": "system"
+										},
+										{
+											"name": "DLVCLNTKN",
+											"group": "system"
+										},
+										{
+											"name": "DLVUSEDTS",
+											"group": "system"
+										},
+										{
+											"name": "DLVDLV",
+											"group": "information"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHIFMET00": {
+				"title": {
+					"da": "Produktfamilier",
+					"en": "Product Families"
+				},
+				"cid": "F",
+				"idColumn": "IFMIFMTKN",
+				"keys": [
+					{
+						"columns": [
+							"IFMIFMTKN"
+						],
+						"name": "WSHIFMET01"
+					}
+				],
+				"columns": {
+					"IFMIFMTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"IFMPNTTKN": {
+						"title": {
+							"da": "Produkt ID",
+							"en": "Product ID"
+						},
+						"type": "integer"
+					},
+					"IFMNAM": {
+						"title": {
+							"da": "Familienavn",
+							"en": "Family Name"
+						},
+						"isTitle": true,
+						"ccsid": 0,
+						"type": "varchar(64)"
+					},
+					"IFMPROP": {
+						"title": {
+							"da": "Familieoplysninger",
+							"en": "Family Information"
+						},
+						"type": "varchar(1024)",
+						"baseType": "varchar",
+						"lenDesc": "1024",
+						"len": 1024,
+						"formatLen": 1024,
+						"uitype": "xpd"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "IFMIFMTKN",
+									"width": 50
+								},
+								{
+									"name": "IFMPNTTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "IFMNAM"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Familieoplysninger",
+								"en": "Family Information"
+							},
+							"columns": [
+								{
+									"name": "IFMIFMTKN"
+								},
+								{
+									"name": "IFMPNTTKN"
+								},
+								{
+									"name": "IFMNAM"
+								},
+								{
+									"name": "IFMPROP"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"columns": [
+										{
+											"name": "IFMIFMTKN"
+										},
+										{
+											"name": "IFMPNTTKN"
+										},
+										{
+											"name": "IFMNAM"
+										},
+										{
+											"name": "IFMPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHINRET00": {
+				"title": {
+					"da": "Produktnavnerelationer",
+					"en": "Productname Relations"
+				},
+				"description": "OBS! [som ved WSHIRLRL00] - OBS! Her skal bruges entitycombo ved produkt og navn id i formen!!",
+				"cid": "H",
+				"idColumn": "INRINRTKN",
+				"columns": {
+					"INRINRTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"INRITMTKN": {
+						"title": {
+							"da": "Produkt ID",
+							"en": "Product ID"
+						},
+						"type": "integer"
+					},
+					"INRNAMTKN": {
+						"title": {
+							"da": "Navn ID",
+							"en": "Name ID"
+						},
+						"type": "integer"
+					},
+					"INRPROP": {
+						"title": {
+							"da": "Relationinformationer",
+							"en": "Relation Information"
+						},
+						"ccsid": 0,
+						"type": "varchar(4096)"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "INRINRTKN",
+									"width": 50
+								},
+								{
+									"name": "INRITMTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "INRNAMTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "INRPROP"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "INRINRTKN"
+								},
+								{
+									"name": "INRITMTKN"
+								},
+								{
+									"name": "INRNAMTKN"
+								},
+								{
+									"name": "INRPROP"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Navnerelation",
+										"en": "Name Relation"
+									},
+									"columns": [
+										{
+											"name": "INRINRTKN"
+										},
+										{
+											"name": "INRITMTKN"
+										},
+										{
+											"name": "INRNAMTKN"
+										},
+										{
+											"name": "INRPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHIRFET00": {
+				"title": {
+					"da": "Produktreferencer",
+					"en": "Product References"
+				},
+				"cid": "I",
+				"idColumn": "IRFIRFTKN",
+				"titleColumn": "IRFITMNO",
+				"columns": {
+					"IRFIRFTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"IRFGRPTKN": {
+						"title": {
+							"da": "Gruppe ID",
+							"en": "Group ID"
+						},
+						"type": "integer"
+					},
+					"IRFNAMTKN": {
+						"title": {
+							"da": "Navn ID",
+							"en": "Name ID"
+						},
+						"type": "integer"
+					},
+					"IRFITMNO": {
+						"title": {
+							"da": "Produktnr.",
+							"en": "Product No."
+						},
+						"type": "varchar(256)"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "IRFIRFTKN",
+									"width": 50
+								},
+								{
+									"name": "IRFGRPTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "IRFNAMTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "IRFITMNO"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "IRFIRFTKN"
+								},
+								{
+									"name": "IRFGRPTKN"
+								},
+								{
+									"name": "IRFNAMTKN"
+								},
+								{
+									"name": "IRFITMNO"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Produktreference",
+										"en": "Product Reference"
+									},
+									"columns": [
+										{
+											"name": "IRFIRFTKN"
+										},
+										{
+											"name": "IRFGRPTKN"
+										},
+										{
+											"name": "IRFNAMTKN"
+										},
+										{
+											"name": "IRFITMNO"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHMNUET00": {
+				"title": {
+					"da": "Navigation",
+					"en": "Navigation"
+				},
+				"cid": "ZZ",
+				"idColumn": "MNUMNUTKN",
+				"keys": [
+					{
+						"primary": true,
+						"columns": [
+							"MNUMNUTKN"
+						],
+						"name": "WSHMNUET01"
+					}
+				],
+				"columns": {
+					"MNUMNUTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"MNUPNTTKN": {
+						"title": {
+							"da": "Parent ID",
+							"en": "Parent ID"
+						},
+						"type": "integer"
+					},
+					"MNUPROP": {
+						"title": {
+							"da": "Menuinformation",
+							"en": "Menu Information"
+						},
+						"xpd": "folder",
+						"type": "varchar(2048)"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "MNUMNUTKN",
+									"width": 50
+								},
+								{
+									"name": "MNUPNTTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "MNUPROP_TITLE",
+									"from": "( jsonGetStr(MNUPROP, 'title') )",
+									"uitype": "i18n",
+									"isTitle": true
+								},
+								{
+									"name": "MNUPROP___CID__",
+									"from": "( jsonGetInt(MNUPROP, '__cid__') )",
+									"title": {
+										"da": "Type",
+										"en": "Type"
+									},
+									"width": 130,
+									"uitype": "menuType"
+								},
+								{
+									"name": "MNUPROP_IMAGE",
+									"from": "( jsonGetStr(MNUPROP, 'image') )",
+									"hidden": true
+								},
+								{
+									"name": "MNUPROP_SEQ",
+									"from": "( jsonGetStr(MNUPROP, 'seq') )",
+									"width": 200
+								}
+							]
+						},
+						"comboText": {
+							"sort": "MNUPROP_TITLE",
+							"columns": [
+								{
+									"name": "MNUMNUTKN"
+								},
+								{
+									"name": "MNUPROP___CID__",
+									"from": "( jsonGetNum(MNUPROP, '__cid__') )"
+								},
+								{
+									"name": "MNUPROP_TITLE",
+									"from": "( jsonGetStr(MNUPROP , 'title.' concat envStr('LANGUAGE','da' )) )",
+									"isTitle": true
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "MNUMNUTKN"
+								},
+								{
+									"name": "MNUPNTTKN"
+								},
+								{
+									"name": "MNUPROP"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								},
+								"information": {
+									"title": {
+										"da": "Informationer",
+										"en": "Information"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Menu",
+										"en": "Menu"
+									},
+									"columns": [
+										{
+											"name": "MNUMNUTKN",
+											"group": "system"
+										},
+										{
+											"name": "MNUPNTTKN",
+											"group": "system"
+										},
+										{
+											"name": "MNUPROP",
+											"group": "information"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHREDET00": {
+				"title": {
+					"da": "URL redirect",
+					"en": "URL Redirect"
+				},
+				"cid": "AH",
+				"idColumn": "REDREDTKN",
+				"columns": {
+					"REDREDTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"REDORL": {
+						"title": {
+							"da": "Tidligere URL",
+							"en": "Previous URL"
+						},
+						"type": "varchar(512)"
+					},
+					"REDNRL": {
+						"title": {
+							"da": "Eksistrende URL",
+							"en": "Existing URL"
+						},
+						"type": "varchar(512)"
+					}
+				},
+				"keys": [
+					{
+						"primary": true,
+						"columns": [
+							"REDREDTKN"
+						],
+						"name": "WSHREDET01"
+					}
+				],
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "REDREDTKN",
+									"width": 50
+								},
+								{
+									"name": "REDORL"
+								},
+								{
+									"name": "REDNRL"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "REDREDTKN"
+								},
+								{
+									"name": "REDORL"
+								},
+								{
+									"name": "REDNRL"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								},
+								"information": {
+									"title": {
+										"da": "Informationer",
+										"en": "Information"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "URL",
+										"en": "URL"
+									},
+									"columns": [
+										{
+											"name": "REDREDTKN",
+											"group": "system"
+										},
+										{
+											"name": "REDORL",
+											"group": "information",
+											"width": 600
+										},
+										{
+											"name": "REDNRL",
+											"group": "information",
+											"width": 600
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHPLGET00": {
+				"title": {
+					"da": "Sider/Sprogvarianter",
+					"en": "Pages/Languages"
+				},
+				"cid": "M",
+				"idColumn": "PLGPLGTKN",
+				"titleColumn": "PLGPROP_TITLE",
+				"columns": {
+					"PLGPLGTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"PLGPAGTKN": {
+						"title": {
+							"da": "Side ID",
+							"en": "Page ID"
+						},
+						"type": "integer"
+					},
+					"PLGLNGCOD": {
+						"title": {
+							"da": "Sprogkode",
+							"en": "Language Code"
+						},
+						"type": "varchar(2)",
+						"enum": "languages",
+						"uitype": "enum"
+					},
+					"PLGSEOURL": {
+						"title": {
+							"da": "SEO URL",
+							"en": "SEO URL"
+						},
+						"type": "varchar(128)"
+					},
+					"PLGPROP": {
+						"title": {
+							"da": "Sideinformationer",
+							"en": "Page Information"
+						},
+						"xpd": "pages",
+						"type": "varchar(32000)",
+						"uitype": "xpd"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "PLGPLGTKN",
+									"width": 50
+								},
+								{
+									"name": "PLGPAGTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "PLGLNGCOD",
+									"width": 200
+								},
+								{
+									"name": "PLGSEOURL",
+									"width": 200
+								},
+								{
+									"name": "PLGPROP"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Side/Sprogvariant",
+								"en": "Page/Language"
+							},
+							"columns": [
+								{
+									"name": "PLGPLGTKN"
+								},
+								{
+									"name": "PLGPAGTKN"
+								},
+								{
+									"name": "PLGLNGCOD"
+								},
+								{
+									"name": "PLGSEOURL"
+								},
+								{
+									"name": "PLGPROP"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Side/Sprogvariant",
+										"en": "Page/Language"
+									},
+									"columns": [
+										{
+											"name": "PLGPLGTKN",
+											"group": "system"
+										},
+										{
+											"name": "PLGPAGTKN",
+											"group": "system"
+										},
+										{
+											"name": "PLGLNGCOD",
+											"group": "system"
+										},
+										{
+											"name": "PLGSEOURL",
+											"group": "system",
+											"width": 600
+										},
+										{
+											"name": "PLGPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHILGET00": {
+				"title": {
+					"da": "Produkt/Sprogvarianter",
+					"en": "Product/Languages"
+				},
+				"cid": "E",
+				"idColumn": "ILGILGTKN",
+				"titleColumn": "ILGPROP_TITLE",
+				"keys": [
+					{
+						"columns": [
+							"ILGSEOURL"
+						],
+						"name": "WSHILGET01"
+					}
+				],
+				"columns": {
+					"ILGILGTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"ILGITMTKN": {
+						"title": {
+							"da": "Produkt ID",
+							"en": "Product ID"
+						},
+						"type": "integer"
+					},
+					"ILGLNGCOD": {
+						"title": {
+							"da": "Sprogkode",
+							"en": "Language Code"
+						},
+						"ccsid": 0,
+						"enum": "languages",
+						"uitype": "enum",
+						"type": "char(2)"
+					},
+					"ILGSEOURL": {
+						"title": {
+							"da": "SEO URL",
+							"en": "SEO URL"
+						},
+						"type": "varchar(128)"
+					},
+					"ILGPROP": {
+						"title": {
+							"da": "Produktinformationer",
+							"en": "Product Information"
+						},
+						"xpd": "product",
+						"type": "varchar(4096)",
+						"uitype": "xpd"
+					}
+				},
+				"permission": {
+					"add": {
+						"form": true,
+						"grid": true
+					},
+					"edit": {
+						"form": true,
+						"grid": false
+					},
+					"remove": {
+						"grid": true,
+						"form": true
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "ILGILGTKN",
+									"width": 50
+								},
+								{
+									"name": "ILGITMTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "ILGLNGCOD",
+									"width": 200
+								},
+								{
+									"name": "ILGSEOURL",
+									"width": 200
+								},
+								{
+									"name": "ILGPROP"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Produkt/Sprogvariant",
+								"en": "Product/Language"
+							},
+							"columns": [
+								{
+									"name": "ILGILGTKN"
+								},
+								{
+									"name": "ILGITMTKN"
+								},
+								{
+									"name": "ILGLNGCOD"
+								},
+								{
+									"name": "ILGSEOURL"
+								},
+								{
+									"name": "ILGPROP"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Produkt/Sprogvariant",
+										"en": "Product/Language"
+									},
+									"columns": [
+										{
+											"name": "ILGILGTKN",
+											"group": "system"
+										},
+										{
+											"name": "ILGITMTKN",
+											"group": "system"
+										},
+										{
+											"name": "ILGLNGCOD",
+											"group": "system"
+										},
+										{
+											"name": "ILGSEOURL",
+											"group": "system",
+											"width": 600
+										},
+										{
+											"name": "ILGPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHSLGET00": {
+				"title": {
+					"da": "Staksider/Sprogvarianter",
+					"en": "Stack Pages/Languages"
+				},
+				"cid": "LB",
+				"idColumn": "SLGSLGTKN",
+				"columns": {
+					"SLGSLGTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"SLGSTCTKN": {
+						"title": {
+							"da": "Stak ID",
+							"en": "Stack ID"
+						},
+						"type": "integer"
+					},
+					"SLGLNGCOD": {
+						"title": {
+							"da": "Sprogkode",
+							"en": "Language Code"
+						},
+						"type": "char(2)",
+						"enum": "languages",
+						"uitype": "enum"
+					},
+					"SLGPROP": {
+						"title": {
+							"da": "Staksideinformationer",
+							"en": "Stack Page Information"
+						},
+						"type": "varchar(10000)",
+						"uitype": "xpd",
+						"xpd": "stack"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "SLGSLGTKN",
+									"width": 50
+								},
+								{
+									"name": "SLGSTCTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "SLGLNGCOD",
+									"width": 200
+								},
+								{
+									"name": "SLGPROP"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"title": {
+								"da": "Stakside/Sprogvariant",
+								"en": "Stack Page/Language"
+							},
+							"columns": [
+								{
+									"name": "SLGSLGTKN"
+								},
+								{
+									"name": "SLGSTCTKN"
+								},
+								{
+									"name": "SLGLNGCOD"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								},
+								"information": {
+									"title": {
+										"da": "Informationer",
+										"en": "Information"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Stakside/Sprogvariant",
+										"en": "Stack Page/Language"
+									},
+									"columns": [
+										{
+											"name": "SLGSLGTKN",
+											"group": "system"
+										},
+										{
+											"name": "SLGSTCTKN",
+											"group": "system"
+										},
+										{
+											"name": "SLGLNGCOD",
+											"group": "system"
+										},
+										{
+											"name": "SLGPROP",
+											"group": "information"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHBCKTR00": {
+				"title": {
+					"da": "Kurve",
+					"en": "Baskets"
+				},
+				"description": "OBS! Skal der ikke laves en XPD til BCKSTO?",
+				"description1": "Kan status blive til en varchar istedet for en integer?",
+				"permission": {
+					"locked": {
+						"form": true
+					},
+					"add": {
+						"form": false,
+						"grid": false
+					},
+					"edit": {
+						"grid": false,
+						"form": false
+					},
+					"remove": {
+						"grid": false,
+						"form": false
+					}
+				},
+				"cid": "A",
+				"idColumn": "BCKBCKTKN",
+				"columns": {
+					"BCKBCKTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"BCKCLNTKN": {
+						"title": {
+							"da": "Klient ID",
+							"en": "Client ID"
+						},
+						"type": "integer"
+					},
+					"BCKSTS": {
+						"title": {
+							"da": "Status",
+							"en": "Status"
+						},
+						"type": "integer",
+						"enum": "basketstatus",
+						"uitype": "enum"
+					},
+					"BCKSTO": {
+						"title": {
+							"da": "Indhold",
+							"en": "Content"
+						},
+						"type": "varchar(30000)",
+						"uitype": "basketItems"
+					},
+					"BCKRES": {
+						"title": {
+							"da": "Resultat",
+							"en": "Result"
+						},
+						"type": "varchar(1000)"
+					},
+					"BCKERPTKN": {
+						"title": {
+							"da": "ERP kode",
+							"en": "ERP Code"
+						},
+						"type": "varchar(64)"
+					}
+				},
+				"ui": {
+					"features": {
+						"preview": {
+							"src": "/wsh-base/widgets/basketPreview.widget",
+							"position": "right",
+							"embeded": "/wsh-base/wshViewTpl.aspx?action=basket&token={1}&language={2}",
+							"key": "BCKBCKTKN",
+							"active": false
+						}
+					},
+					"grids": {
+						"portfolio": {
+							"features": {
+								"preview": {
+									"active": true
+								}
+							},
+							"columns": [
+								{
+									"name": "BCKBCKTKN",
+									"width": 50
+								},
+								{
+									"name": "BCKSTO_BASKETTOKEN",
+									"from": "( jsonGetStr(BCKSTO, 'BasketToken') )",
+									"title": {
+										"da": "Kurv ID",
+										"en": "Basket ID"
+									},
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "BCKCLNTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "BCKSTO_SUBTOTAL",
+									"from": "( jsonGetStr(BCKSTO, 'subTotal') )",
+									"title": {
+										"da": "Beløb",
+										"en": "Amount"
+									}
+								},
+								{
+									"name": "BCKSTO_CURRENCY",
+									"from": "( jsonGetStr(BCKSTO, 'currency') )",
+									"title": {
+										"da": "Valuta",
+										"en": "Currency"
+									}
+								},
+								{
+									"name": "BCKSTO_VATRATE",
+									"from": "( jsonGetStr(BCKSTO, 'vatRate') )",
+									"title": {
+										"da": "Moms",
+										"en": "VAT"
+									},
+									"hidden": true
+								},
+								{
+									"name": "BCKSTO_VATTOTAL",
+									"from": "( jsonGetStr(BCKSTO, 'vatTotal') )",
+									"title": {
+										"da": "Momsbeløb",
+										"en": "VAT Amount"
+									}
+								},
+								{
+									"name": "BCKSTO_DELIVERYTOTAL",
+									"from": "( jsonGetStr(BCKSTO, 'deliveryTotal') )",
+									"title": {
+										"da": "Leveringsomkostninger",
+										"en": "Delivery Costs"
+									}
+								},
+								{
+									"name": "BCKSTO_EXPFEE",
+									"from": "( jsonGetStr(BCKSTO, 'expFee') )",
+									"title": {
+										"da": "Ekspeditionsgebyr",
+										"en": "Handling Fee"
+									}
+								},
+								{
+									"name": "BCKSTO_COURIERPRICE",
+									"from": "( jsonGetStr(BCKSTO, 'courierPrice') )",
+									"title": {
+										"da": "Fragtpris",
+										"en": "Freight Price"
+									}
+								},
+								{
+									"name": "BCKSTO_COURIERFEE",
+									"from": "( jsonGetStr(BCKSTO, 'courierFee') )",
+									"title": {
+										"da": "Fragtgebyr",
+										"en": "Freight Fee"
+									},
+									"hidden": true
+								},
+								{
+									"name": "BCKSTS"
+								}
+							]
+						},
+						"clientbaskets": {
+							"features": {
+								"preview": {
+									"active": true
+								}
+							},
+							"columns": [
+								{
+									"name": "BCKBCKTKN",
+									"width": 50
+								},
+								{
+									"name": "BCKCLNTKN",
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "BCKSTO_BASKETTOKEN",
+									"from": "( jsonGetStr(BCKSTO, 'BasketToken') )",
+									"title": {
+										"da": "Kurv ID",
+										"en": "Basket ID"
+									},
+									"width": 80,
+									"hidden": true
+								},
+								{
+									"name": "BCKSTO_SUBTOTAL",
+									"from": "( jsonGetStr(BCKSTO, 'subTotal') )",
+									"title": {
+										"da": "Beløb",
+										"en": "Amount"
+									}
+								},
+								{
+									"name": "BCKSTO_CURRENCY",
+									"from": "( jsonGetStr(BCKSTO, 'currency') )",
+									"title": {
+										"da": "Valuta",
+										"en": "Currency"
+									}
+								},
+								{
+									"name": "BCKSTO_VATRATE",
+									"from": "( jsonGetStr(BCKSTO, 'vatRate') )",
+									"title": {
+										"da": "Moms",
+										"en": "VAT"
+									},
+									"hidden": true
+								},
+								{
+									"name": "BCKSTO_VATTOTAL",
+									"from": "( jsonGetStr(BCKSTO, 'vatTotal') )",
+									"title": {
+										"da": "Momsbeløb",
+										"en": "VAT Amount"
+									}
+								},
+								{
+									"name": "BCKSTO_DELIVERYTOTAL",
+									"from": "( jsonGetStr(BCKSTO, 'deliveryTotal') )",
+									"title": {
+										"da": "Leveringsomkostninger",
+										"en": "Delivery Costs"
+									}
+								},
+								{
+									"name": "BCKSTO_EXPFEE",
+									"from": "( jsonGetStr(BCKSTO, 'expFee') )",
+									"title": {
+										"da": "Ekspeditionsgebyr",
+										"en": "Handling Fee"
+									}
+								},
+								{
+									"name": "BCKSTO_COURIERPRICE",
+									"from": "( jsonGetStr(BCKSTO, 'courierPrice') )",
+									"title": {
+										"da": "Fragtpris",
+										"en": "Freight Price"
+									}
+								},
+								{
+									"name": "BCKSTO_COURIERFEE",
+									"from": "( jsonGetStr(BCKSTO, 'courierFee') )",
+									"title": {
+										"da": "Fragtgebyr",
+										"en": "Freight Fee"
+									},
+									"hidden": true
+								},
+								{
+									"name": "BCKSTS"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "BCKBCKTKN"
+								},
+								{
+									"name": "BCKCLNTKN"
+								},
+								{
+									"name": "BCKSTS"
+								},
+								{
+									"name": "BCKSTO"
+								},
+								{
+									"name": "BCKRES"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Kurvinformation",
+										"en": "Basket Information"
+									},
+									"columns": [
+										{
+											"name": "BCKBCKTKN",
+											"width": 150
+										},
+										{
+											"name": "BCKCLNTKN",
+											"width": 400
+										},
+										{
+											"name": "BCKSTS",
+											"width": 400
+										},
+										{
+											"name": "BCKRES",
+											"width": 400
+										},
+										{
+											"name": "BCKSTO"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHNTFTR00": {
+				"title": {
+					"da": "Notifikationscenter",
+					"en": "Notification Center"
+				},
+				"description": "OBS! Bedre titel? er det noget klienten bruger? Skal besked og emne 'scrambles'?",
+				"description1": "Kan status blive til en varchar istedet for en integer?",
+				"description2": "Skal vi ikke ha datoer på?",
+				"cid": "K",
+				"idColumn": "NTFNTFTKN",
+				"titleColumn": "NTFSBJ",
+				"permission": {
+					"edit": {
+						"form": false,
+						"grid": false
+					},
+					"remove": {
+						"grid": false
+					}
+				},
+				"columns": {
+					"NTFNTFTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"NTFTYP": {
+						"title": {
+							"da": "Type",
+							"en": "Type"
+						},
+						"type": "varchar(32)"
+					},
+					"NTFRCP": {
+						"title": {
+							"da": "Modtager",
+							"en": "Recipient"
+						},
+						"type": "varchar(128)",
+						"vtype": "email"
+					},
+					"NTFFRM": {
+						"title": {
+							"da": "Afsender",
+							"en": "Sender"
+						},
+						"type": "varchar(128)"
+					},
+					"NTFRPY": {
+						"title": {
+							"da": "Svar til",
+							"en": "Reply to"
+						},
+						"type": "varchar(128)"
+					},
+					"NTFSBJ": {
+						"title": {
+							"da": "Emne",
+							"en": "Subject"
+						},
+						"isTitle": true,
+						"type": "varchar(256)"
+					},
+					"NTFMSG": {
+						"title": {
+							"da": "Besked",
+							"en": "Message"
+						},
+						"uitype": "html",
+						"type": "varchar(16384)"
+					},
+					"NTFSTS": {
+						"title": {
+							"da": "Status",
+							"en": "Status"
+						},
+						"type": "integer",
+						"uitype": "enum",
+						"enum": "notificationstatus"
+					},
+					"NTFCRTTS": {
+						"title": {
+							"da": "Oprettet",
+							"en": "Created"
+						},
+						"type": "timestamp",
+						"uitype": "isotimestamp",
+						"default": "current timestamp"
+					},
+					"NTFUPDTS": {
+						"title": {
+							"da": "Ændret",
+							"en": "Updated"
+						},
+						"type": "timestamp",
+						"uitype": "isotimestamp",
+						"default": "current timestamp"
+					},
+					"NTFPROP": {
+						"title": {
+							"da": "Proxy XPD",
+							"en": "Proxy XPD"
+						},
+						"type": "varchar(64)",
+						"uitype": "xpd",
+						"xpd": "notification"
+					}
+				},
+				"ui": {
+					"features": {
+						"menu": {
+							"src": "/wsh-base/widgets/notificationMenu.widget"
+						},
+						"preview": {
+							"src": "/wsh-base/widgets/htmlPreview.widget",
+							"position": "right",
+							"embeded": "",
+							"key": "NTFMSG",
+							"active": false
+						}
+					},
+					"grids": {
+						"portfolio": {
+							"features": {
+								"menu": {},
+								"preview": {
+									"active": true
+								}
+							},
+							"sort": "NTFUPDTS DESC",
+							"columns": [
+								{
+									"name": "NTFNTFTKN",
+									"width": 50
+								},
+								{
+									"name": "NTFCRTTS",
+									"hidden": true
+								},
+								{
+									"name": "NTFUPDTS"
+								},
+								{
+									"name": "NTFRCP"
+								},
+								{
+									"name": "NTFSBJ"
+								},
+								{
+									"name": "NTFMSG",
+									"width": 500,
+									"hide": true
+								},
+								{
+									"name": "NTFFRM"
+								},
+								{
+									"name": "NTFRPY"
+								},
+								{
+									"name": "NTFTYP",
+									"width": 80
+								},
+								{
+									"name": "NTFSTS",
+									"width": 80
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"features": {
+								"menu": {}
+							},
+							"layout": {
+								"portlets": {
+									"index": 1,
+									"hidden": true
+								},
+								"NTFPROP": {
+									"index": 2
+								}
+							},
+							"title": {
+								"da": "Notifikation",
+								"en": "Notification"
+							},
+							"columns": [
+								{
+									"name": "NTFNTFTKN"
+								},
+								{
+									"name": "NTFCRTTS"
+								},
+								{
+									"name": "NTFUPDTS"
+								},
+								{
+									"name": "NTFTYP"
+								},
+								{
+									"name": "NTFRCP"
+								},
+								{
+									"name": "NTFFRM"
+								},
+								{
+									"name": "NTFRPY"
+								},
+								{
+									"name": "NTFSBJ"
+								},
+								{
+									"name": "NTFMSG"
+								},
+								{
+									"name": "NTFSTS"
+								},
+								{
+									"name": "NTFPROP"
+								}
+							],
+							"groups": {
+								"system": {
+									"title": {
+										"da": "System",
+										"en": "System"
+									}
+								},
+								"information": {
+									"title": {
+										"da": "Informationer",
+										"en": "Information"
+									}
+								}
+							},
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Notifikationscenter",
+										"en": "Notification Center"
+									},
+									"columns": [
+										{
+											"name": "NTFNTFTKN",
+											"group": "system"
+										},
+										{
+											"name": "NTFTYP",
+											"group": "system"
+										},
+										{
+											"name": "NTFCRTTS",
+											"group": "system"
+										},
+										{
+											"name": "NTFUPDTS",
+											"group": "system"
+										},
+										{
+											"name": "NTFRCP",
+											"group": "information",
+											"width": 600
+										},
+										{
+											"name": "NTFFRM",
+											"group": "information",
+											"width": 600
+										},
+										{
+											"name": "NTFRPY",
+											"group": "information",
+											"width": 600
+										},
+										{
+											"name": "NTFSBJ",
+											"group": "information",
+											"width": 600
+										},
+										{
+											"name": "NTFSTS",
+											"group": "information",
+											"width": 600
+										},
+										{
+											"name": "NTFMSG",
+											"group": "information",
+											"width": "90%",
+											"minWidth": 600,
+											"height": 400
+										},
+										{
+											"name": "NTFPROP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			"WSHIRLRL00": {
+				"title": {
+					"da": "Produktrelationer",
+					"en": "Product Relations"
+				},
+				"cid": "G",
+				"idColumn": "IRLIRLTKN",
+				"description": "OBS! Der skal kigges på titlen - en entitet der er en relation der bruger en relation? Også kig på den relations titler",
+				"columns": {
+					"IRLIRLTKN": {
+						"title": {
+							"da": "ID",
+							"en": "ID"
+						},
+						"type": "integer"
+					},
+					"IRLIFMTKN": {
+						"title": {
+							"da": "Familie ID",
+							"en": "Family ID"
+						},
+						"type": "integer"
+					},
+					"IRLITMTKN": {
+						"title": {
+							"da": "Produkt ID",
+							"en": "Product ID"
+						},
+						"type": "integer"
+					},
+					"IRLRELTYP": {
+						"title": {
+							"da": "Type",
+							"en": "Type"
+						},
+						"type": "varchar(32)"
+					}
+				},
+				"ui": {
+					"grids": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "IRLIRLTKN",
+									"width": 50
+								},
+								{
+									"name": "IRLIFMTKN",
+									"width": 80
+								},
+								{
+									"name": "IRLITMTKN",
+									"width": 80
+								},
+								{
+									"name": "IRLRELTYP"
+								}
+							]
+						}
+					},
+					"forms": {
+						"portfolio": {
+							"columns": [
+								{
+									"name": "IRLIRLTKN"
+								},
+								{
+									"name": "IRLIFMTKN"
+								},
+								{
+									"name": "IRLITMTKN"
+								},
+								{
+									"name": "IRLRELTYP"
+								}
+							],
+							"items": {
+								"portlet1": {
+									"title": {
+										"da": "Produktrelation",
+										"en": "Product Relation"
+									},
+									"columns": [
+										{
+											"name": "IRLIRLTKN"
+										},
+										{
+											"name": "IRLIFMTKN"
+										},
+										{
+											"name": "IRLITMTKN"
+										},
+										{
+											"name": "IRLRELTYP"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"__question__": "Why are the on properties arrays in the relations?",
+		"relations": [
+			{
+				"between": {
+					"entity": "WSHCLNET00",
+					"on": [
+						{
+							"name": "CLNCLNTKN"
+						}
+					],
+					"occurrence": "one"
+				},
+				"and": {
+					"entity": "WSHBCKTR00",
+					"on": [
+						{
+							"name": "BCKCLNTKN"
+						}
+					],
+					"occurrence": "many"
+				},
+				"properties": {
+					"title": {
+						"da": "Kurve",
+						"en": "Baskets"
+					},
+					"cid": "RE01",
+					"as": "WSHCLNRE01",
+					"shownAsChild": {
+						"between": false,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHPAGET00",
+					"on": [
+						{
+							"name": "PAGPAGTKN"
+						}
+					]
+				},
+				"and": {
+					"entity": "WSHPLGET00",
+					"on": [
+						{
+							"name": "PLGPAGTKN"
+						}
+					]
+				},
+				"properties": {
+					"title": {
+						"da": "Side til sprogvarianter relation",
+						"en": "Page to language variants relation"
+					},
+					"cid": "RE02",
+					"as": "WSHPAGRE02",
+					"shownAsChild": {
+						"between": false,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHIFMET00",
+					"on": [
+						{
+							"name": "IFMIFMTKN"
+						}
+					],
+					"occurrence": "one"
+				},
+				"and": {
+					"entity": "WSHIRLRL00",
+					"on": [
+						{
+							"name": "IRLIRLTKN"
+						}
+					],
+					"occurrence": "many"
+				},
+				"properties": {
+					"title": {
+						"da": "Produktfamilie relationer",
+						"en": "Product Family relations"
+					},
+					"cid": "RE03",
+					"as": "WSHIFMRE03",
+					"shownAsChild": {
+						"between": true,
+						"and": true
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHNAMET00",
+					"on": [
+						{
+							"name": "NAMNAMTKN"
+						}
+					]
+				},
+				"and": {
+					"entity": "WSHINRET00",
+					"on": [
+						{
+							"name": "INRNAMTKN"
+						}
+					]
+				},
+				"properties": {
+					"title": {
+						"da": "Produktnavnerelationer",
+						"en": "Productname relations"
+					},
+					"cid": "RE04",
+					"as": "WSHNAMRE04",
+					"shownAsChild": {
+						"between": false,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHNAMET00",
+					"on": [
+						{
+							"name": "NAMNAMTKN"
+						}
+					]
+				},
+				"and": {
+					"entity": "WSHIRFET00",
+					"on": [
+						{
+							"name": "IRFNAMTKN"
+						}
+					]
+				},
+				"properties": {
+					"title": {
+						"da": "Produktreference relationer",
+						"en": "Product Reference relations"
+					},
+					"cid": "RE05",
+					"as": "WSHNAMRE05",
+					"shownAsChild": {
+						"between": false,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHITMET00",
+					"on": [
+						{
+							"name": "ITMITMTKN"
+						}
+					],
+					"occurrence": "many"
+				},
+				"and": {
+					"entity": "WSHIRLRL00",
+					"on": [
+						{
+							"name": "IRLITMTKN"
+						}
+					],
+					"occurrence": "one"
+				},
+				"properties": {
+					"title": {
+						"da": "Produkt til produkt relationer",
+						"en": "Product to product relations"
+					},
+					"cid": "RE06",
+					"as": "WSHITMRE06",
+					"shownAsChild": {
+						"between": true,
+						"and": true
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHITMET00",
+					"on": [
+						{
+							"name": "ITMIFMTKN"
+						}
+					],
+					"occurrence": "many"
+				},
+				"and": {
+					"entity": "WSHIFMET00",
+					"on": [
+						{
+							"name": "IFMIFMTKN"
+						}
+					],
+					"occurrence": "one"
+				},
+				"properties": {
+					"title": {
+						"da": "Produktfamilie relationer",
+						"en": "Product Family relations"
+					},
+					"cid": "RE07",
+					"as": "WSHITMRE07",
+					"shownAsChild": {
+						"between": true,
+						"and": true
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHITMET00",
+					"on": [
+						{
+							"name": "ITMITMTKN"
+						}
+					]
+				},
+				"and": {
+					"entity": "WSHILGET00",
+					"on": [
+						{
+							"name": "ILGITMTKN"
+						}
+					]
+				},
+				"properties": {
+					"title": {
+						"da": "Produkt til sprog relationer",
+						"en": "Product to language relations"
+					},
+					"cid": "RE08",
+					"as": "WSHITMRE08",
+					"shownAsChild": {
+						"between": false,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHITMET00",
+					"on": [
+						{
+							"name": "ITMITMTKN"
+						}
+					]
+				},
+				"and": {
+					"entity": "WSHINRET00",
+					"on": [
+						{
+							"name": "INRITMTKN"
+						}
+					]
+				},
+				"properties": {
+					"title": {
+						"da": "Produktnavne relationer",
+						"en": "Product Name relations"
+					},
+					"cid": "RE09",
+					"as": "WSHITMRE09",
+					"shownAsChild": {
+						"between": false,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHCURET00",
+					"on": [
+						{
+							"name": "CURCURTKN"
+						}
+					],
+					"occurrence": "one"
+				},
+				"and": {
+					"entity": "WSHCRPET00",
+					"on": [
+						{
+							"name": "CRPCURTKN"
+						}
+					],
+					"occurrence": "many"
+				},
+				"properties": {
+					"title": {
+						"da": "Transportørpriser",
+						"en": "Courier Prices"
+					},
+					"cid": "RE10",
+					"as": "WSHCURRE10",
+					"shownAsChild": {
+						"between": true,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHCLNET00",
+					"on": [
+						{
+							"name": "CLNCLNTKN"
+						}
+					],
+					"occurrence": "one"
+				},
+				"and": {
+					"entity": "WSHFLIET00",
+					"on": [
+						{
+							"name": "FLICLNTKN"
+						}
+					],
+					"occurrence": "many"
+				},
+				"properties": {
+					"title": {
+						"da": "Favoritter",
+						"en": "Favorites"
+					},
+					"cid": "RE11",
+					"as": "WSHCLNRE11",
+					"shownAsChild": {
+						"between": true,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHWHIET00",
+					"on": [
+						{
+							"name": "WHIWHITKN"
+						}
+					],
+					"occurrence": "one"
+				},
+				"and": {
+					"entity": "WSHSLVET00",
+					"on": [
+						{
+							"name": "SLVWHITKN"
+						}
+					],
+					"occurrence": "many"
+				},
+				"properties": {
+					"title": {
+						"da": "Lagerbeholdning",
+						"en": "Inventory"
+					},
+					"cid": "RE12",
+					"as": "WSHWHIRE12",
+					"shownAsChild": {
+						"between": true,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHITMET00",
+					"on": [
+						{
+							"name": "ITMITMTKN"
+						}
+					],
+					"occurrence": "one"
+				},
+				"and": {
+					"entity": "WSHSLVET00",
+					"on": [
+						{
+							"name": "SLVITMTKN"
+						}
+					],
+					"occurrence": "many"
+				},
+				"properties": {
+					"title": {
+						"da": "Produktbeholdning",
+						"en": "Product Stock"
+					},
+					"cid": "RE13",
+					"as": "WSHITMRE13",
+					"shownAsChild": {
+						"between": true,
+						"and": false
+					}
+				}
+			},
+			{
+				"between": {
+					"entity": "WSHCRPET00",
+					"on": [
+						{
+							"name": "CRPCRPTKN"
+						}
+					]
+				},
+				"and": {
+					"entity": "WSHCLGET00",
+					"on": [
+						{
+							"name": "CLGCRPTKN"
+						}
+					]
+				},
+				"properties": {
+					"title": "OBS!! Hvad er dette? Der er ingen WSHCLGET00 entitet!",
+					"cid": "XYZZZ___",
+					"as": "CourierPrice_language",
+					"shownAsChild": {
+						"between": false,
+						"and": false
+					}
+				}
+			}
+		],
+		"types": {},
+		"languages": {
+			"da": {
+				"text": {}
+			},
+			"en": {
+				"text": {}
+			},
+			"fr": {
+				"text": {}
+			}
+		},
+		"navigator": {
+			"system": 3,
+			"rrn": 8,
+			"applicationGroup": 8
+		}
+	}
+}

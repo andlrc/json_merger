@@ -1,0 +1,25 @@
+{
+	"array": [
+		{
+			"name": "qwerty",
+			"a": 1
+		},
+		{
+			"name": "qwerty",
+			"a": 2,
+			"abc": 1234,
+			"title": {}
+		},
+		{
+			"name": "tkn"
+		}
+	],
+	"array2": [
+		{
+			"a": 1
+		},
+		{
+			"a": 2
+		}
+	]
+}

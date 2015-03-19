@@ -1,0 +1,33 @@
+{
+	"@extends": ["02-A.json"],
+	"@override": ["myArray2", "myObject2"],
+
+	"myArray2": [
+		{
+			"b": 10
+		}
+	],
+
+	"myObject2": {
+		"b": 10
+	},
+
+	"myArray": [
+		{
+			"b": 10
+		},
+		{
+			"b": 20
+		}
+	],
+	"myObject": {
+		"prop1": 10,
+		"prop2": {
+			"@override": true,
+			"b": 20
+		},
+		"prop3": {
+			"b": 30
+		}
+	}
+}

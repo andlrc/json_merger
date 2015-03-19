@@ -1,0 +1,25 @@
+#!/bin/bash
+test_dir='tests';
+ls -f $test_dir | while read -r file; do
+	if [[ $file == '.' || $file == '..' ]]; then
+		continue
+	fi
+	./json_merger "$test_dir/$file" --pretty > "outputs/$file"
+
+	if [[ ! -f "expected_outputs/$file" ]]; then
+		echo "$file result doesn't exists"
+		continue
+	fi
+
+	result=`diff expected_outputs/$file outputs/$file`
+
+	if [[ "$result" == "" ]]; then
+	  echo "$file passed test"
+	else
+	  echo "$file failed"
+	  echo "$result"
+	  exit 1;
+	fi
+done
+
+exit 0;
