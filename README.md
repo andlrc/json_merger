@@ -1,6 +1,6 @@
-[![json_merger downloads/month](//img.shields.io/npm/dm/json_merger.svg)](https://www.npmjs.com/package/json_merger)
-[![json_merger version](//img.shields.io/npm/v/json_merger.svg)](https://www.npmjs.com/package/json_merger)
-[![json_merger licence](//img.shields.io/npm/l/json_merger.svg)](https://www.npmjs.com/package/json_merger)
+[![json_merger downloads/month](https://img.shields.io/npm/dm/json_merger.svg)](https://www.npmjs.com/package/json_merger)
+[![json_merger version](https://img.shields.io/npm/v/json_merger.svg)](https://www.npmjs.com/package/json_merger)
+[![json_merger licence](https://img.shields.io/npm/l/json_merger.svg)](https://www.npmjs.com/package/json_merger)
 
 ## Table of Contents:
 
