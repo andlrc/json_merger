@@ -1,9 +1,7 @@
 {
 	"array": [
 		{
-			"fn": function(a, b){
-				return { "a": 1 };
-			}(1, 2)
+			"fn": function(a, b) { return { "a": a, "b": b }; }(1, 2) 
 		}
 	]
 }
