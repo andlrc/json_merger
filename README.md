@@ -369,13 +369,11 @@ Usage:
 
 Make sure that add json_merger to the `$PATH` variable:
 
-    npm install -g json_merger
+    npm install json_merger
 
 **~/.bashrc ( *~/.bash_profile* on OSX )**
 
-    #NODE_PATH contains the path to global installed node modules
-    #export NODE_PATH=/usr/local/lib/node_modules/;
-    export PATH=$NODE_PATH/json_merger/:$PATH
+    export PATH=/path/to/my/json_merger/bin/:$PATH
 
 ## Expiremental usage:
 

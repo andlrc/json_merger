@@ -1,5 +1,8 @@
 "use strict";
 
+// Initial source code:
+// https://github.com/douglascrockford/JSON-js/blob/master/json_parse.js
+
 var MAX_SIZE = 2 * 1024 * 1024;
 
 var control_chars = require('./control_chars.js');
