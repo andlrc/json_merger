@@ -1,6 +1,6 @@
 {
   "name": "json_merger",
-  "version": "0.9.19",
+  "version": "0.9.21",
   "main": "json_merger.js",
   "scripts": {
     "test": "bash runtests"
