@@ -198,7 +198,7 @@ var merge = function(super_json, child_json) {
 *  fromFile
 ***************************************************************************************************/
 var fromFile = function(file, opts) {
-	if ( util.isObject(file) ) {
+	if ( util.isObject(file) || util.isArray(file) ) {
 		return file;
 	}
 
@@ -227,6 +227,7 @@ var fromFile = function(file, opts) {
 			[ class_json[indicators.EXTENDS] ] :
 			[];
 
+
 	// Delete @extends from base_json to avoid infinitive recursion
 	delete class_json[indicators.EXTENDS];
 	// Push class_json to the path list
@@ -243,6 +244,7 @@ var fromFile = function(file, opts) {
 		// _as is a hack so that we know its we are calling the function recursive
 		_as: ANTI_SANITIZER
 	}, options);
+
 	// super_json is our output, start by containing first file in array
 	var super_json = fromFile(file_list.shift(), json_config);
 	// If this file doesn't extend anything and is called from the outside
