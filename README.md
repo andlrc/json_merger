@@ -11,8 +11,10 @@
     * [scope](#configscope)
     * [variables](#configvariables)
   * [`@extends`](#extends)
+  * [`@root`](#root)
 * [Indicators](#indicators)
   * [`@extends`](#extends)
+  * [`@root`](#root)
   * [`@override`](#override)
   * [`@append`, `@prepend`, `@insert`](#append-prepend-insert)
   * [`@match`](#match)
@@ -124,8 +126,40 @@ Variables is used in [`@extends`](#extends) like the following:
 An array / string indicating which files a given object extends, this is a root property
 
     {
-    	"@extends": ["main_file.json", "project_file.js", "mixin_file.json"]
+        "@extends": ["main_file.json", "project_file.js", "mixin_file.json"]
     }
+
+### `@root`
+
+Used when merging arrays, if an array is the root JSON, will remap the root to the value of this indidator
+
+    {
+        "@extends": ["fileB.json"],
+        "@root": [
+            {
+                "a": 1
+            }
+        ]
+    }
+
+**fileB.json**
+
+    [
+        {
+            "b": 1
+        }
+    ]
+
+**Output**
+
+
+    [
+        {
+            "b": 1,
+            "a": 1
+        }
+    ]
+
 
 ### `@override`
 
