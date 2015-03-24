@@ -80,9 +80,13 @@ processors.object = function(super_value, class_value, path, root) {
 	return util.sanitizeValue(super_value);
 };
 processors.array = function(super_value, class_value, path, root) {
-	// Store childs that have the @append indicator
-	// Use  super_child_key to store array index relative to super_value.
+	// Store childs that have the @append, @prepend, @insert indicator
 	var inserts = [];
+	// Use prepend_index to store the current index that we are prepending at, eg with two
+	//   or more prepends we to make sure that the first @prepend
+	//   will be first item of the prepented items and not the last.
+	var prepend_index = 0;
+	// Use super_child_key to store array index relative to super_value.
 	var super_child_key = 0;
 	util.each(class_value, function(child_value, child_key) {
 		// Fetch all @append and push them to the array after initial iteration.
@@ -91,9 +95,10 @@ processors.array = function(super_value, class_value, path, root) {
 		}
 		// Fetch all @prepend and unshift them to the array after initial iteration.
 		else if ( util.has(child_value, indicators.PREPEND) ) {
-			inserts.push([0, child_value]);
+			inserts.push([prepend_index, child_value]);
+			prepend_index++;
 		}
-		// Fetch all @insert and unshift them to the array after initial iteration.
+		// Fetch all @insert and splice them to the array after initial iteration.
 		else if ( util.has(child_value, indicators.INSERT) ) {
 			inserts.push([child_value[indicators.INSERT], child_value]);
 		}
