@@ -1,17 +1,19 @@
 "use strict";
 var indicators = {
+	// root indicators
 	EXTENDS: '@extends',
-	OVERRIDE: '@override',
-	COMMENT: '@comment',
-	DELETE: '@delete',
-	MATCH: '@match',
-	// Move us the same as @insert but used with match
-	MOVE: '@move',
+	ROOT: '@root',
 	// used for array, append to end, prepend to beginning, or insert at index:
 	APPEND: '@append',
 	PREPEND: '@prepend',
 	INSERT: '@insert',
-	ROOT: '@root'
+	// @move is the same as @insert but used with @match
+	MOVE: '@move',
+	// rest
+	OVERRIDE: '@override',
+	COMMENT: '@comment',
+	DELETE: '@delete',
+	MATCH: '@match'
 };
 
 indicators.ALL = Object.keys(indicators).map(function(key) {
