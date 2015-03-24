@@ -1,0 +1,17 @@
+{
+	"@extends": ["09-A.json"],
+	"array": [
+		{
+			"@prepend": true,
+			"b": 1
+		},
+		{
+			"@prepend": true,
+			"b": 2
+		},
+		{
+			"@prepend": true,
+			"b": 3
+		}
+	]
+}
