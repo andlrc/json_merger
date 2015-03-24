@@ -7,7 +7,7 @@
   },
   "repository": {},
   "author": "Andreas Louv <and@comprendo.dk>",
-  "license": "ISC",
+  "license": "MIT",
   "description": "Merge JSON with indicators such as `@override`, `@match`, `@delete` and `@insert` to tell the processor how to merge the files.",
   "dependencies": {},
   "devDependencies": {},
