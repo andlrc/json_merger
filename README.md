@@ -254,7 +254,7 @@ Match can be used to match a given item in an array; Supported syntax:
 
     [prop1=val1][prop2='val2']
 
-Quoting is optional but required if you want strict comparison
+Quoting is optional but required if you want strict comparison, eg `[prop='2']` will match `{"prop": "2"}` and not `{"prop": 2}`
 
 **Usuage**
 
