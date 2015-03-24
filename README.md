@@ -1,6 +1,6 @@
 [![json_merger downloads/month](https://img.shields.io/npm/dm/json_merger.svg)](https://www.npmjs.com/package/json_merger)
 [![json_merger version](https://img.shields.io/npm/v/json_merger.svg)](https://www.npmjs.com/package/json_merger)
-[![json_merger licence](https://img.shields.io/npm/l/json_merger.svg)](https://www.npmjs.com/package/json_merger)
+[![json_merger license](https://img.shields.io/npm/l/json_merger.svg)](https://www.npmjs.com/package/json_merger)
 
 ## Table of Contents:
 
@@ -24,7 +24,7 @@
 * [Command line interface `json_merger`](#command-line-interface-json_merger)
 * [Expiremental usage](#expiremental-usage)
 * [Root indicators](#root-indicators)
-* [Licence](#licence)
+* [License](#license)
 
 Apply indicators such as [`@insert`](#append-prepend-insert), [`@match`](#match) and [`@override`](#override) to tell the processor how to merge the files.
 
@@ -569,7 +569,7 @@ Current supported root indicators:
 * [`@extends`](#extends)
 * [`@root`](#root)
 
-## Licence: ##
+## License: ##
 
 The MIT License (MIT)
 
