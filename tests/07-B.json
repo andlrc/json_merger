@@ -1,0 +1,18 @@
+{
+	"@extends": ["07-A.json"],
+	"outer_array": [
+		{
+			"@match": "[name=cfg]/inner_array/[name=item3]",
+			"more_junk": true
+		},
+		{
+			"@match": "[name=cfg]",
+			"inner_array": [
+				{
+					"@match": "[name=item2]",
+					"other_junk": true
+				}
+			]
+		}
+	]
+}

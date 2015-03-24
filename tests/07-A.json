@@ -1,0 +1,32 @@
+{
+	"outer_array": [
+		{
+			"name": "item1"
+		},
+		{
+			"name": "item2"
+		},
+		{
+			"name": "item3"
+		},
+		{
+			"name": "cfg",
+			"inner_array": [
+				{
+					"name": "item1"
+				},
+				{
+					"name": "item2"
+				},
+				{
+					"name": "item3",
+					"a": 1,
+					"b": 2
+				},
+				{
+					"name": "item4"
+				}
+			]
+		}
+	]
+}
