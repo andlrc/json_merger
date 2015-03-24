@@ -10,7 +10,8 @@ var indicators = {
 	// used for array, append to end, prepend to beginning, or insert at index:
 	APPEND: '@append',
 	PREPEND: '@prepend',
-	INSERT: '@insert'
+	INSERT: '@insert',
+	ROOT: '@root'
 };
 
 indicators.ALL = Object.keys(indicators).map(function(key) {

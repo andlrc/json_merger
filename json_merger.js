@@ -231,7 +231,14 @@ var fromFile = function(file, opts) {
 	// Delete @extends from base_json to avoid infinitive recursion
 	delete class_json[indicators.EXTENDS];
 	// Push class_json to the path list
-	file_list.push(class_json);
+	// If class_json have the @root indicator use the value from the indidator
+	//   as the root that will be merged
+	if ( util.has(class_json, indicators.ROOT) ) {
+		file_list.push(class_json[indicators.ROOT]);
+	}
+	else {
+		file_list.push(class_json);
+	}
 	/***********************************************************************************************
 	*  Merge file by file
 	***********************************************************************************************/
