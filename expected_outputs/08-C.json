@@ -1,0 +1,11 @@
+[
+	{
+		"name": "fieldA",
+		"type": "varchar(64)"
+	},
+	{
+		"name": "token",
+		"type": "float",
+		"length": 11
+	}
+]
