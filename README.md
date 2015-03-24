@@ -23,9 +23,10 @@
 * [`.merge(objA, objB)`](#mergeobja-objb)
 * [Command line interface `json_merger`](#command-line-interface-json_merger)
 * [Expiremental usage](#expiremental-usage)
+* [Root indicators](#root-indicators)
 * [Licence](#licence)
 
-> Apply indicators such as [`@insert`](#append-prepend-insert), [`@match`](#match) and [`@override`](#override) to tell the processor how to merge the files.
+Apply indicators such as [`@insert`](#append-prepend-insert), [`@match`](#match) and [`@override`](#override) to tell the processor how to merge the files.
 
 ## `.fromFile('file.json')`
 
@@ -123,7 +124,7 @@ Variables is used in [`@extends`](#extends) like the following:
 
 ### `@extends`
 
-An array / string indicating which files a given object extends, this is a root property
+An array / string indicating which files a given object extends, this is a [root indicator](#root-indicators)
 
     {
         "@extends": ["main_file.json", "project_file.js", "mixin_file.json"]
@@ -131,7 +132,7 @@ An array / string indicating which files a given object extends, this is a root 
 
 ### `@root`
 
-Used when merging arrays, if an array is the root JSON, will remap the root to the value of this indidator
+Used when merging arrays, if the root of the JSON tree is an array, you can use [`@root`](#root) to tell the processor what root that will be merged upon, this is a [root indicator](#root-indicators):
 
     {
         "@extends": ["fileB.json"],
@@ -493,6 +494,15 @@ Result:
             "b": (function(a, b) { /* another code here */ })(1, 2)
         }
     }
+
+## Root indicators ##
+
+Root indicators is properties that are only supported on the outer most level of the JSON tree.
+
+Current supported root indicators:
+
+* [`@extends`](#extends)
+* [`@root`](#root)
 
 ## Licence: ##
 
