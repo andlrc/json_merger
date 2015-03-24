@@ -306,6 +306,50 @@ Quoting is optional but required if you want strict comparison
     	]
     }
 
+**Advanced usage**
+
+    {
+        "@extends": ["b.json"],
+        "outer_array": [
+            {
+                "@match": "[key=value]/inner_array/[inner_key=inner_value]",
+                "type": "float"
+            }
+        ]
+    }
+
+**b.json**
+
+    {
+        "outer_array": [
+            {
+                "key": "value",
+                "inner_array": [
+                    {
+                        "inner_key": "inner_value"
+                    }
+                ]
+            }
+        ]
+    }
+
+**Result**
+
+
+    {
+        "outer_array": [
+            {
+                "key": "value",
+                "inner_array": [
+                    {
+                        "inner_key": "inner_value",
+                        "type": "float"
+                    }
+                ]
+            }
+        ]
+    }
+
 ### `@move`
 
 This indicator is the same as [`@insert`](#append-prepend-insert) but is used together with [`@match`](#match).
