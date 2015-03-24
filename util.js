@@ -246,7 +246,7 @@ var util = {
 	},
 	each: function(obj, fn) {
 		// array
-		if ( obj.length === +obj.length ) {
+		if ( util.isArray(obj) ) {
 			for ( var i = 0; i < obj.length; i++ ) {
 				if ( fn.call(obj, obj[i], i, obj) === false ) break;
 			}
