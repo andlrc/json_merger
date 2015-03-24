@@ -226,7 +226,7 @@ var literal = function () {
 
     ret += control_chars.LITERAL;
 
-    return ret.replace(/[\t\r\n\s]+/g, ' ').trim();
+    return ret;
 };
 var array = function () {
     // Parse an array value.
