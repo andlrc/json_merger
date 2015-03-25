@@ -4,6 +4,10 @@ ls -f $test_dir | while read -r file; do
 	if [[ $file == '.' || $file == '..' ]]; then
 		continue
 	fi
+
+	# make sure that we have the "outputs" folder
+	mkdir -p "outputs"
+
 	bin/json_merger "$test_dir/$file" --javascript --pretty > "outputs/$file"
 
 	if [[ ! -f "expected_outputs/$file" ]]; then
