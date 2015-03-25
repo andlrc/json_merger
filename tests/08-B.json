@@ -1,6 +1,6 @@
 {
 	"@extends": ["08-A.json"],
-	"@root": [
+	"@value": [
 		{
 			"@match": "[name=token]",
 			"type": "float"

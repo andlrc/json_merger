@@ -1,0 +1,8 @@
+{
+	"sequence": [
+		"fieldA",
+		"insertedField",
+		"fieldB",
+		"fieldC"
+	]
+}

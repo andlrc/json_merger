@@ -48,19 +48,22 @@ var util = {
 	has: function(obj, key) {
 		return _hasOwn.call(obj, key);
 	},
-	sanitizeValue: function(v, deep) {
-		if ( util.isObject(v) ) {
+	sanitizeValue: function(obj, deep) {
+		if ( util.isObject(obj) ) {
+			if ( util.has(obj, indicators.VALUE) ) {
+				return util.sanitizeValue(obj[indicators.VALUE]);
+			}
 			util.each(indicators.ALL, function(indicator) {
-				delete v[indicator];
+				delete obj[indicator];
 			});
 		}
-		if ( deep && (util.isObject(v) || util.isArray(v)) ) {
-			util.each(v, function(child_value, child_key) {
-				v[child_key] = util.sanitizeValue(child_value, deep);
+		if ( deep && (util.isObject(obj) || util.isArray(obj)) ) {
+			util.each(obj, function(child_value, child_key) {
+				obj[child_key] = util.sanitizeValue(child_value, deep);
 			});
 		}
 
-		return v;
+		return obj;
 	},
 	parseValue: function(v) {
 		var char0 = v.charAt(0);

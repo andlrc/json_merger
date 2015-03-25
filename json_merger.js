@@ -29,6 +29,7 @@ processors.primitive = function(super_value, class_value, path, root) {
 	return util.sanitizeValue(class_value);
 };
 processors.dirrentType = function(super_value, class_value, path, root) {
+
 	return util.sanitizeValue(class_value, true);
 };
 processors.object = function(super_value, class_value, path, root) {
@@ -164,8 +165,14 @@ processors.unknown = function(super_value, class_value, path, root) {
 		path = '';
 	}
 
+	// Remap the class_value if it have the @value indicator
+	if ( util.isObject(class_value) && util.has(class_value, indicators.VALUE) ) {
+		class_value = class_value[indicators.VALUE];
+	}
+
 	var super_type = util.getType(super_value);
 	var class_type = util.getType(class_value);
+
 	/***********************************************************************************************
 	*  Primitives
 	***********************************************************************************************/
@@ -235,15 +242,8 @@ var fromFile = function(file, opts) {
 
 	// Delete @extends from base_json to avoid infinitive recursion
 	delete class_json[indicators.EXTENDS];
-	// Push class_json to the path list
-	// If class_json have the @root indicator use the value from the indidator
-	//   as the root that will be merged
-	if ( util.has(class_json, indicators.ROOT) ) {
-		file_list.push(class_json[indicators.ROOT]);
-	}
-	else {
-		file_list.push(class_json);
-	}
+	// Push class_json to the path list:
+	file_list.push(class_json);
 	/***********************************************************************************************
 	*  Merge file by file
 	***********************************************************************************************/

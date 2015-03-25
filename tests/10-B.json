@@ -1,0 +1,9 @@
+{
+    "@extends": ["10-A.json"],
+	"sequence": [
+		{
+			"@insert": 1,
+			"@value": "insertedField"
+		}
+	]
+}

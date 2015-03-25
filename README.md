@@ -11,14 +11,13 @@
     * [scope](#configscope)
     * [variables](#configvariables)
   * [`@extends`](#extends)
-  * [`@root`](#root)
 * [Indicators](#indicators)
   * [`@extends`](#extends)
-  * [`@root`](#root)
   * [`@override`](#override)
   * [`@append`, `@prepend`, `@insert`](#append-prepend-insert)
   * [`@match`](#match)
   * [`@move`](#move)
+  * [`@value`](#value)
   * [`@comment`](#comment)
 * [`.merge(objA, objB)`](#mergeobja-objb)
 * [Command line interface `json_merger`](#command-line-interface-json_merger)
@@ -141,42 +140,6 @@ An array / string indicating which files a given object extends, this is a [root
 {
     "@extends": ["main_file.json", "project_file.js", "mixin_file.json"]
 }
-```
-
-### `@root`
-
-Used when merging arrays, if the root of the JSON tree is an array, you can use [`@root`](#root) to tell the processor what root that will be merged upon, this is a [root indicator](#root-indicators):
-
-```json
-{
-    "@extends": ["fileB.json"],
-    "@root": [
-        {
-            "a": 1
-        }
-    ]
-}
-```
-
-**fileB.json**
-
-```json
-[
-    {
-        "b": 1
-    }
-]
-```
-
-**Output**
-
-```json
-[
-    {
-        "b": 1,
-        "a": 1
-    }
-]
 ```
 
 
@@ -437,6 +400,47 @@ Quoting is optional but required if you want strict comparison, eg `[prop='2']` 
 
 This indicator is the same as [`@insert`](#append-prepend-insert) but is used together with [`@match`](#match).
 
+### `@value`
+
+Used when merging arrays containing primitives or other arrays
+
+```json
+{
+    "@extends": ["fileB.json"],
+	"sequence": [
+		{
+			"@insert": 1,
+			"@value": "insertedField"
+		}
+	]
+}
+```
+
+**fileB.json**
+
+```json
+{
+	"sequence": [
+		"fieldA",
+		"fieldB",
+		"fieldC"
+	]
+}
+```
+
+**Output**
+
+```json
+[
+	"sequence": [
+		"fieldA",
+		"insertedField",
+		"fieldB",
+		"fieldC"
+	]
+]
+```
+
 ### `@comment`
 
 These will be removed in the merging process and is intented to be used for internal comments about overrides etc.
@@ -567,7 +571,6 @@ Root indicators is properties that are only supported on the outer most level of
 Current supported root indicators:
 
 * [`@extends`](#extends)
-* [`@root`](#root)
 
 ## License: ##
 
