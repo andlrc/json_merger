@@ -431,14 +431,14 @@ Used when merging arrays containing primitives or other arrays
 **Output**
 
 ```json
-[
+{
 	"sequence": [
 		"fieldA",
 		"insertedField",
 		"fieldB",
 		"fieldC"
 	]
-]
+}
 ```
 
 ### `@comment`
