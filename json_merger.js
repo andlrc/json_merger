@@ -40,14 +40,6 @@ processors.object = function(super_value, class_value, path, root) {
 		return util.sanitizeValue(class_value, true);
 	}
 
-	var delete_action = class_value[indicators.DELETE];
-	// If delete is set to true return control_chars.DELETE, this will delete the property
-	//    in the JSON.stringify
-	// If delete is set to an array delete those properties
-	if ( delete_action === true ) {
-		return control_chars.DELETE;
-	}
-
 	util.each(class_value, function(child_value, child_key) {
 		// Prevent indicators from being mapped out to super_value
 		if ( util.isIndicator(child_key) ) {
@@ -69,6 +61,7 @@ processors.object = function(super_value, class_value, path, root) {
 
 
 	// If delete is an array and child_key is present set super_value to control_chars.DELETE.
+	var delete_action = class_value[indicators.DELETE];
 	if ( util.isArray(delete_action) ) {
 		util.each(super_value, function(child_value, child_key) {
 
@@ -170,6 +163,19 @@ processors.unknown = function(super_value, class_value, path, root) {
 		class_value = class_value[indicators.VALUE];
 	}
 
+	// Force delete the super_value if class_value have the @delete indicator set to true
+	//   This will allow deletion of primitives and arrays, with the following syntax:
+	//     super = { arr: [ 1, 2, 3 ] }
+	//     child = { arr: { "@delete": true } }
+	if ( util.isObject(class_value) && util.has(class_value, indicators.DELETE) ) {
+		// If delete is set to true return control_chars.DELETE, this will delete the property
+		//    in the JSON.stringify
+		// If delete is set to an array delete those properties
+		if ( class_value[indicators.DELETE] === true ) {
+			return control_chars.DELETE;
+		}
+	}
+
 	var super_type = util.getType(super_value);
 	var class_type = util.getType(class_value);
 
@@ -227,9 +233,16 @@ var fromFile = function(file, opts) {
 	/***********************************************************************************************
 	*  Initialize
 	***********************************************************************************************/
-	var file_path = file.charAt(0) == '/' ? path.normalize(file) : path.normalize(
-		options.scope ? options.scope + '/' + file : file
-	);
+	var file_path;
+	// if absolute path just normalize the path:
+	if ( path.resolve(file) === path.normalize(file) ) {
+		file_path = path.normalize(file);
+	}
+	else {
+		file_path = path.normalize(
+			options.scope ? options.scope + '/' + file : file
+		);
+	}
 	var class_json = parseFile(file_path, options);
 	// Stores JSON objects of files that have to be merged together:
 	// ["a", "b"]

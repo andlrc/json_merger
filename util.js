@@ -208,8 +208,18 @@ var util = {
 						match = true;
 
 						util.each(path.attrs, function(attr_value, attr_key) {
-							if ( obj_value[attr_key] !== attr_value ) {
-								match = false;
+							// @value indicator is used to match the value of
+							//   the object and not match attributes:
+							if ( attr_key == indicators.ATTR_VALUE ) {
+								if ( obj_value !== attr_value ) {
+									match = false;
+								}
+							}
+							// Default match key=value
+							else {
+								if ( obj_value[attr_key] !== attr_value ) {
+									match = false;
+								}
 							}
 						});
 
@@ -220,7 +230,7 @@ var util = {
 						}
 					});
 
-					if ( !match ) {
+					if ( match === false ) {
 						return null;
 					}
 				}
@@ -232,7 +242,7 @@ var util = {
 							return false;
 						}
 					});
-					if ( !match ) {
+					if ( match === false ) {
 						return null;
 					}
 				}
