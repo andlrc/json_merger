@@ -289,6 +289,8 @@ Match can be used to match a given item in an array; Supported syntax:
 
     [prop1=val1][prop2='val2']
 
+You can ether use prop1, prop2 for matching regular properties `@value` which will match the value of primitives in the array:
+
 Quoting is optional but required if you want strict comparison, eg `[prop='2']` will match `{"prop": "2"}` and not `{"prop": 2}`
 
 **Usuage**
@@ -393,6 +395,46 @@ Quoting is optional but required if you want strict comparison, eg `[prop='2']` 
             ]
         }
     ]
+}
+```
+
+
+**Advanced Usuage 2 (`@value`)**
+
+```json
+{
+	"@extends": ["b.json"],
+	"seq": [
+		{
+			"@match": "[@value=b]",
+			"@delete": true
+		}
+	]
+}
+```
+
+**b.json**
+
+```json
+{
+	"seq": [
+		"a",
+		"b",
+		"c",
+		"d"
+	]
+}
+```
+
+**Result**
+
+```json
+{
+	"columns": [
+		"a",
+		"c",
+		"d"
+	]
 }
 ```
 
