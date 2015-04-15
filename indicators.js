@@ -15,6 +15,7 @@ var indicators = {
 	VALUE: '@value',
 	OVERRIDE: '@override',
 	COMMENT: '@comment',
+	COMMENT: '@id',
 	DELETE: '@delete',
 	MATCH: '@match'
 };

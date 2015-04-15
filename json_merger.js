@@ -12,6 +12,10 @@ var util = require('./util.js');
 ***************************************************************************************************/
 var parseFile = function(file, options) {
 	var data = fs.readFileSync(file, 'utf-8');
+
+	// Remove UTF-8 BOM codes:
+	data = data.trim();
+
 	if ( options.javascript ) {
 		return util.js.parse(data);
 	}
@@ -234,7 +238,8 @@ var fromFile = function(file, opts) {
 	*  Initialize
 	***********************************************************************************************/
 	var file_path;
-	// if absolute path just normalize the path:
+	// If the file path is absolute use it
+	// If not then prepend the current scope of the previous file.
 	if ( path.resolve(file) === path.normalize(file) ) {
 		file_path = path.normalize(file);
 	}
@@ -281,7 +286,7 @@ var fromFile = function(file, opts) {
 
 	// TODO: Figure out when to sanitize super_json hopefully we don't have to
 	//   santize all returns. I'm not sure about this, and I'm not sure if we
-	//   even can sanitize super_json when we return it.
+	//   can even sanitize super_json when we return it.
 	//   Is super_json used by anyone recursively?
 
 	while ( file_list.length ) {

@@ -19,6 +19,7 @@
   * [`@move`](#move)
   * [`@value`](#value)
   * [`@comment`](#comment)
+  * [`@id`](#id)
 * [`.merge(objA, objB)`](#mergeobja-objb)
 * [Command line interface `json_merger`](#command-line-interface-json_merger)
 * [Expiremental usage](#expiremental-usage)
@@ -490,6 +491,30 @@ These will be removed in the merging process and is intented to be used for inte
 ```json
 {
     "@comment": "I did this because...."
+}
+```
+
+### `@id`
+
+This can be matches in [`@match`](#match) using the following syntax:
+
+```json
+{
+	"@extends": ["b.json"],
+    "array": [
+		{ "a": 2, "@match": "[@id=my_id]" }
+    ]
+}
+```
+
+**b.json**
+
+```json
+{
+    "array": [
+		{ "a": 1 },
+		{ "a": 2, "@id": "my_id" }
+    ]
 }
 ```
 
