@@ -277,12 +277,6 @@ var fromFile = function(file, opts) {
 
 	// super_json is our output, start by containing first file in array
 	var super_json = fromFile(file_list.shift(), json_config);
-	// If this file doesn't extend anything and is called from the outside
-	//   eg json_merger.fromFile('file_which_doesnt_extends_another_file.json')
-	//   we need to sanitize the file and remove all indicators
-	if ( file_list.length == 0 && options._as != ANTI_SANITIZER ) {
-		super_json = util.sanitizeValue(super_json, true);
-	}
 
 	// TODO: Figure out when to sanitize super_json hopefully we don't have to
 	//   santize all returns. I'm not sure about this, and I'm not sure if we
@@ -293,6 +287,13 @@ var fromFile = function(file, opts) {
 		var json = fromFile(file_list.shift(), json_config);
 
 		merge(super_json, json);
+	}
+
+	// If this file is called from the outside eg json_merger.from...
+	//   File('file_which_doesnt_extends_another_file.json')
+	//   we need to sanitize the file and remove all indicators
+	if ( options._as != ANTI_SANITIZER ) {
+		super_json = util.sanitizeValue(super_json, true, true);
 	}
 
 	/***********************************************************************************************

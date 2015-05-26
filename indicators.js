@@ -24,4 +24,8 @@ indicators.ALL = Object.keys(indicators).map(function(key) {
 	return indicators[key];
 });
 
+indicators.ALL_EXCL_ID = indicators.ALL.filter(function(indicator) {
+	return indicator != indicators.ID;
+});
+
 module.exports = indicators;
