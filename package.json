@@ -1,12 +1,12 @@
 {
   "name": "json_merger",
-  "version": "0.12.5",
+  "version": "1.0.0",
   "main": "json_merger.js",
   "scripts": {
     "test": "bash runtests"
   },
   "repository": {},
-  "author": "Andreas Louv <and@comprendo.dk>",
+  "author": "Andreas Louv <and@sitemule.com>",
   "license": "MIT",
   "description": "Merge JSON with indicators such as `@override`, `@match`, `@delete` and `@insert` to tell the processor how to merge the files.",
   "dependencies": {},
