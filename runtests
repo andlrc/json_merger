@@ -2,11 +2,12 @@
 mkdir -p "outputs"
 for file in tests/*; do
 	[ -e "$file" ] || continue
-	output_file="outputs/${file##*/}"
+	basename="${file##*/}"
+	output_file="outputs/$basename"
 
 	bin/json_merger "$file" --javascript --pretty > "$output_file"
 
-	result=$(diff "expected_outputs/${file##*/}" "$output_file")
+	result=$(diff "expected_outputs/$basename" "$output_file")
 	if [ $? -eq 0 ]; then
 		echo "$file passed test"
 	else
