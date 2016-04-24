@@ -22,10 +22,10 @@ var escapee = {
 };
 var error = function (m) {
     // Call error when something is wrong.
-    var msg = m + ' at ' + at+ ':'+text.length+': ';
-    var s = Math.max(at-10, 0);
-    var e = Math.min(at+30, text.length);
-    var code = text.slice(s, at-1) + ' >>'+ ch +'<< ' + text.slice(at, e);
+    var msg = m + ' at ' + at + ':' + text.length + ': ';
+    var s = Math.max(at - 10, 0);
+    var e = Math.min(at + 30, text.length);
+    var code = text.slice(s, at - 1) + ' >>' + ch + '<< ' + text.slice(at, e);
 
     msg += code;
 
@@ -48,8 +48,8 @@ var next = function (c) {
 var number = function () {
     // Parse a number value.
 
-    var number,
-        string = '';
+    var number;
+    var string = '';
 
     if (ch === '-') {
         string = '-';
@@ -80,17 +80,18 @@ var number = function () {
     number = +string;
     if (!isFinite(number)) {
         error("Bad number");
-    } else {
+    }
+ else {
         return number;
     }
 };
 var string = function () {
     // Parse a string value.
 
-    var hex,
-        i,
-        string = '',
-        uffff;
+    var hex;
+    var i;
+    var string = '';
+    var uffff;
 
     // When parsing for string values, we must look for " and \ characters.
 
@@ -112,12 +113,15 @@ var string = function () {
                         uffff = uffff * 16 + hex;
                     }
                     string += String.fromCharCode(uffff);
-                } else if (typeof escapee[ch] === 'string') {
+                }
+                else if (typeof escapee[ch] === 'string') {
                     string += escapee[ch];
-                } else {
+                }
+                else {
                     break;
                 }
-            } else {
+            }
+            else {
                 string += ch;
             }
         }
@@ -133,14 +137,14 @@ var white = function () {
 };
 var maybe = function(str) {
     var i = 0;
-    while ( i < str.length ) {
-        if ( text.charAt(at+i-1) != str.charAt(i) ) {
+    while (i < str.length) {
+        if (text.charAt(at + i - 1) != str.charAt(i)) {
             return false;
         }
         i++;
     }
 
-    ch = text.charAt(at+i-1);
+    ch = text.charAt(at + i - 1);
     at += i;
 
     return true;
@@ -149,13 +153,13 @@ var literal = function () {
 
     white();
 
-    if ( maybe('true') ) {
+    if (maybe('true')) {
         return true;
     }
-    if ( maybe('false') ) {
+    if (maybe('false')) {
         return false;
     }
-    if ( maybe('null') ) {
+    if (maybe('null')) {
         return null;
     }
 
@@ -170,15 +174,15 @@ var literal = function () {
     var size = 0;
 
     outer:
-        while ( true && size <= MAX_SIZE ) {
+        while (true && size <= MAX_SIZE) {
             size++;
-            switch ( ch ) {
+            switch (ch) {
             case '{':
                 brackets[0]++;
                 break;
             case '}':
                 brackets[0]--;
-                if ( brackets[0] < 0 ) {
+                if (brackets[0] < 0) {
                     break outer;
                 }
                 break;
@@ -187,7 +191,7 @@ var literal = function () {
                 break;
             case ']':
                 brackets[1]--;
-                if ( brackets[1] < 0 ) {
+                if (brackets[1] < 0) {
                     break outer;
                 }
                 break;
@@ -196,11 +200,11 @@ var literal = function () {
                 break;
             case ')':
                 brackets[2]--;
-                if ( brackets[2] < 0 ) {
+                if (brackets[2] < 0) {
                     error("Didn't expect )");
                 }
                 break;
-            default: break
+            default: break;
             }
 
             ret += ch;
@@ -208,19 +212,19 @@ var literal = function () {
             ch = text.charAt(at);
             at++;
 
-            if ( ch == null ) {
+            if (ch == null) {
                 error("Syntax error");
                 break;
             }
 
-            if ( ch == ',' ) {
-                if ( brackets[0] == 0 && brackets[1] == 0 && brackets[2] == 0 ) {
+            if (ch == ',') {
+                if (brackets[0] == 0 && brackets[1] == 0 && brackets[2] == 0) {
                     break;
                 }
             }
         }
 
-    if ( size > MAX_SIZE ) {
+    if (size > MAX_SIZE) {
         error("Max size exceeded, while parsing a literal.");
     }
 
@@ -256,8 +260,8 @@ var array = function () {
 var object = function () {
     // Parse an object value.
 
-    var key,
-        object = {};
+    var key;
+    var object = {};
 
     if (ch === '{') {
         next('{');
@@ -289,7 +293,7 @@ var value = function (initial) {
 
     // Parse a JSON value. It could be an object, an array, a string, a number, or a literal.
     white();
-    if ( initial ) {
+    if (initial) {
         switch (ch) {
         case '{':
             return object();
@@ -335,23 +339,28 @@ var parse = function(source, reviver) {
     // result.
 
     return typeof reviver === 'function'
-    ? (function walk(holder, key) {
-        var k, v, value = holder[key];
+        ? walk({ '': result }, '')
+        : result;
+
+    function walk(holder, key) {
+        var k;
+        var v;
+        var value = holder[key];
         if (value && typeof value === 'object') {
             for (k in value) {
                 if (Object.prototype.hasOwnProperty.call(value, k)) {
                     v = walk(value, k);
                     if (v !== undefined) {
                         value[k] = v;
-                    } else {
+                    }
+                    else {
                         delete value[k];
                     }
                 }
             }
         }
         return reviver.call(holder, key, value);
-    }({'': result}, ''))
-    : result;
+    }
 };
 var stringify = function(obj, indentation) {
 
@@ -359,18 +368,18 @@ var stringify = function(obj, indentation) {
 
     var start = -1;
     var end = -1;
-    while ( (start=ret.indexOf(control_chars.LITERAL)) > -1 ) {
+    while ((start = ret.indexOf(control_chars.LITERAL)) > -1) {
         end = ret.indexOf(control_chars.LITERAL, start + 1) + control_chars.LITERAL.length;
 
         var func = ret.slice(start + control_chars.LITERAL.length, end - control_chars.LITERAL.length);
 
-        ret = ret.slice(0, start-1) + func.replace(/(\\)./g, function(all, char, index) {
-            return JSON.parse('"\\'+ func.charAt(index+1) +'"');
-        }) + ret.slice(end+1);
+        ret = ret.slice(0, start - 1) + func.replace(/(\\)./g, function(all, char, index) {
+            return JSON.parse('"\\' + func.charAt(index + 1) + '"');
+        }) + ret.slice(end + 1);
     }
 
     return ret;
-}
+};
 
 module.exports = {
     parse: parse,

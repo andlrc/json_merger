@@ -19,8 +19,8 @@ var util = {
 		});
 	},
 	extend: function(a, b) {
-		for ( var prop in b ) {
-			if ( _hasOwn.call(b, prop) ) {
+		for (var prop in b) {
+			if (_hasOwn.call(b, prop)) {
 				a[prop] = b[prop];
 			}
 		}
@@ -28,8 +28,8 @@ var util = {
 		return a;
 	},
 	defaults: function(a, b) {
-		for ( var prop in b ) {
-			if ( a[prop] == null && _hasOwn.call(b, prop) ) {
+		for (var prop in b) {
+			if (a[prop] == null && _hasOwn.call(b, prop)) {
 				a[prop] = b[prop];
 			}
 		}
@@ -37,7 +37,7 @@ var util = {
 		return a;
 	},
 	getType: function(v) {
-		return _toString.call(v).slice(8,-1);
+		return _toString.call(v).slice(8, -1);
 	},
 	isPrimitive: function(type) {
 		return type !== 'Array' && type !== 'Object';
@@ -49,15 +49,15 @@ var util = {
 		return _hasOwn.call(obj, key);
 	},
 	sanitizeValue: function(obj, deep, delete_id) {
-		if ( util.isObject(obj) ) {
-			if ( util.has(obj, indicators.VALUE) ) {
+		if (util.isObject(obj)) {
+			if (util.has(obj, indicators.VALUE)) {
 				return util.sanitizeValue(obj[indicators.VALUE]);
 			}
 			util.each(delete_id ? indicators.ALL : indicators.ALL_EXCL_ID, function(indicator) {
 				delete obj[indicator];
 			});
 		}
-		if ( deep && (util.isObject(obj) || util.isArray(obj)) ) {
+		if (deep && (util.isObject(obj) || util.isArray(obj))) {
 			util.each(obj, function(child_value, child_key) {
 				obj[child_key] = util.sanitizeValue(child_value, deep, delete_id);
 			});
@@ -67,8 +67,8 @@ var util = {
 	},
 	parseValue: function(v) {
 		var char0 = v.charAt(0);
-		var char1 = v.charAt(v.length-1);
-		if ( char0 == char1 && (char0 == '\'' || char0 == '"') ) {
+		var char1 = v.charAt(v.length - 1);
+		if (char0 == char1 && (char0 == '\'' || char0 == '"')) {
 			return v.slice(1, -1);
 		}
 		else {
@@ -87,17 +87,17 @@ var util = {
 
 		var obj = root;
 
-		while ( paths.length && obj ) {
+		while (paths.length && obj) {
 			var path = paths.shift();
 
 			obj = obj[path];
 		}
 
-		if ( util.isArray(obj) ) {
+		if (util.isArray(obj)) {
 			obj.splice(child_key, 1);
 			return true;
 		}
-		else if ( util.isObject(obj) ) {
+		else if (util.isObject(obj)) {
 			delete obj[child_key];
 			return true;
 		}
@@ -112,13 +112,13 @@ var util = {
 
 		var obj = root;
 
-		while ( paths.length && obj ) {
+		while (paths.length && obj) {
 			var path = paths.shift();
 
 			obj = obj[path];
 		}
 
-		if ( util.isArray(obj) || util.isObject(obj) ) {
+		if (util.isArray(obj) || util.isObject(obj)) {
 			obj[child_key] = value;
 			return true;
 		}
@@ -137,25 +137,26 @@ var util = {
 		var a_attr_match = null;
 
 		var matches = [];
+
 		// If we are relative we need to append path to the key:
 		var is_relative = key.charAt(0) != '/';
 
-		if ( is_relative ) {
-			key = path+'/'+key;
+		if (is_relative) {
+			key = path + '/' + key;
 		}
-		while ( (a_match=key.match(r_xpath)) ) {
+		while ((a_match = key.match(r_xpath))) {
 			// remove match from string to prevent infinity recursion
 			key = key.slice(a_match[0].length);
 
 			var match = a_match[1];
 
 			// if dealing with attrs parse them: ([name='abc'][id=123])
-			if ( r_attr.test(match) ) {
+			if (r_attr.test(match)) {
 				var o_attr = {
 					type: 'attr',
 					attrs: {}
 				};
-				while ( (a_attr_match=match.match(r_attr)) ) {
+				while ((a_attr_match = match.match(r_attr))) {
 					// remove match from string to prevent infinity recursion
 					match = match.slice(a_attr_match[0].length);
 
@@ -164,12 +165,14 @@ var util = {
 
 				matches.push(o_attr);
 			}
+
 			// Go one up the "ladder":
-			else if ( match == '..' ) {
+			else if (match == '..') {
 				matches.splice(matches.length - 1, 1);
 			}
+
 			// Omit self reference:
-			else if ( match != '.' ) {
+			else if (match != '.') {
 				matches.push({
 					type: 'path',
 					path: match
@@ -187,21 +190,21 @@ var util = {
 		// Contain empty element as first element to get leading slash
 		var _abs_path = [''];
 
-		while ( paths.length ) {
+		while (paths.length) {
 
-			if ( obj == null ) {
+			if (obj == null) {
 				return null;
 			}
 
 			var path = paths.shift();
 
-			if ( path.type == 'path' ) {
+			if (path.type == 'path') {
 				obj = obj[path.path];
 				_abs_path.push(path.path);
 			}
-			else if ( path.type == 'attr' ) {
+			else if (path.type == 'attr') {
 				// Run through the array and find the match
-				if ( util.isArray(obj) ) {
+				if (util.isArray(obj)) {
 					var match = true;
 					util.each(obj, function(obj_value, obj_key) {
 
@@ -210,39 +213,40 @@ var util = {
 						util.each(path.attrs, function(attr_value, attr_key) {
 							// @value indicator is used to match the value of
 							//   the object and not match attributes:
-							if ( attr_key == indicators.ATTR_VALUE ) {
-								if ( obj_value !== attr_value ) {
+							if (attr_key == indicators.ATTR_VALUE) {
+								if (obj_value !== attr_value) {
 									match = false;
 								}
 							}
+
 							// Default match key=value
 							else {
-								if ( obj_value[attr_key] !== attr_value ) {
+								if (obj_value[attr_key] !== attr_value) {
 									match = false;
 								}
 							}
 						});
 
-						if ( match ) {
+						if (match) {
 							obj = obj[obj_key];
 							_abs_path.push(obj_key);
 							return false;
 						}
 					});
 
-					if ( match === false ) {
+					if (match === false) {
 						return null;
 					}
 				}
 				else {
 					var match = true;
 					util.each(path.attrs, function(attr_value, attr_key) {
-						if ( obj[attr_key] !== attr_value ) {
+						if (obj[attr_key] !== attr_value) {
 							match = false;
 							return false;
 						}
 					});
-					if ( match === false ) {
+					if (match === false) {
 						return null;
 					}
 				}
@@ -259,15 +263,19 @@ var util = {
 	},
 	each: function(obj, fn) {
 		// array
-		if ( util.isArray(obj) ) {
-			for ( var i = 0; i < obj.length; i++ ) {
-				if ( fn.call(obj, obj[i], i, obj) === false ) break;
+		if (util.isArray(obj)) {
+			for (var i = 0; i < obj.length; i++) {
+				if (fn.call(obj, obj[i], i, obj) === false) {
+					break;
+				}
 			}
 		}
 		else {
-			for ( var prop in obj ) {
-				if ( _hasOwn.call(obj, prop) ) {
-					if ( fn.call(obj, obj[prop], prop, obj) === false ) break;
+			for (var prop in obj) {
+				if (_hasOwn.call(obj, prop)) {
+					if (fn.call(obj, obj[prop], prop, obj) === false) {
+						break;
+					}
 				}
 			}
 		}
@@ -277,7 +285,7 @@ var util = {
 ['Object', 'Array', 'Null', 'String', 'Number'].forEach(function(type) {
 	util['is' + type] = function(v) {
 		return util.getType(v) == type;
-	}
+	};
 });
 
 module.exports = util;

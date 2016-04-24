@@ -16,12 +16,12 @@ var variables = {};
 
 var var_gate = false;
 
-if ( input == '-h' || input == '--help' ) {
+if (input == '-h' || input == '--help') {
 	console.log('');
 	console.log('usage:');
-	console.log('  json_merger inputFile [...options]')
+	console.log('  json_merger inputFile [...options]');
 	console.log('');
-	console.log('options:')
+	console.log('options:');
 	console.log('  --help, -h                    Show this page');
 	console.log('  --pretty, -p                  Prettify the output json');
 	console.log('  --javascript, -j              Perserve JavaScript functions, regexp, etc');
@@ -30,19 +30,21 @@ if ( input == '-h' || input == '--help' ) {
 }
 else {
 	user_args.forEach(function(arg, key) {
-		if ( arg == '-p' || arg == '--pretty' ) {
+		if (arg == '-p' || arg == '--pretty') {
 			pretty = true;
 		}
-		else if ( arg == '-j' || arg == '--javascript' ) {
+		else if (arg == '-j' || arg == '--javascript') {
 			javascript = true;
 		}
+
 		// Open the var_gate meaning that the next options will be key->value variables
-		else if ( arg == '-v' || arg == '--variables' ) {
+		else if (arg == '-v' || arg == '--variables') {
 			var_gate = true;
 		}
+
 		// Match variables for key->value:
 		//   key1=value1
-		else if ( var_gate && r_keyValue.test(arg) ) {
+		else if (var_gate && r_keyValue.test(arg)) {
 			var match = arg.match(r_keyValue);
 
 			variables[match[1]] = match[2];
@@ -52,7 +54,7 @@ else {
 		}
 	});
 
-	if ( input == null || !fs.existsSync(input) ) {
+	if (input == null || !fs.existsSync(input)) {
 		console.log('Requires filename as first argument');
 	}
 	else {
