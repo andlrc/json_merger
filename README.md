@@ -148,7 +148,7 @@ An array / string indicating which files a given object extends, this is a [root
 
 An array or `true` indicating that the given property will be overridden. When used with `true` the whole property will be overridden. When used with an array the listed properties will be overridden:
 
-**Usuage of `true`**
+**Usage of `true`**
 
 ```json
 {
@@ -185,7 +185,7 @@ An array or `true` indicating that the given property will be overridden. When u
 }
 ```
 
-**Usuage of array**
+**Usage of array**
 
 ```json
 {
@@ -294,7 +294,7 @@ You can ether use prop1, prop2 for matching regular properties `@value` which wi
 
 Quoting is optional but required if you want strict comparison, eg `[prop='2']` will match `{"prop": "2"}` and not `{"prop": 2}`
 
-**Usuage**
+**Usage**
 
 ```json
 {
@@ -400,7 +400,7 @@ Quoting is optional but required if you want strict comparison, eg `[prop='2']` 
 ```
 
 
-**Advanced Usuage 2 (`@value`)**
+**Advanced Usage 2 (`@value`)**
 
 ```json
 {
@@ -583,7 +583,7 @@ npm install json_merger
 export PATH=/path/to/my/json_merger/bin/:$PATH
 ```
 
-## Expiremental usage:
+## Experimental Usage:
 
 Working with JavaScript code in JSON *Use at own risk :-)*
 
