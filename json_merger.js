@@ -252,7 +252,78 @@ processors.unknown = function(super_value, class_value, path, root) {
 var merge = function(super_json, child_json) {
 	return processors.unknown(super_json, child_json, null, super_json);
 };
-/***************************************************************************************************
+
+/*******************************************************************************
+*  fromObject
+*******************************************************************************/
+
+var fromObject = function(class_json, opts) {
+	var options = util.extend({
+		javascript: false, // true, false
+		scope: '', // directory to look for initial file
+		variables: {
+			// contains a key->value object with variables to @extends
+		}
+	}, opts);
+
+	// Stores JSON objects of files that have to be merged together:
+	// ["a", "b"]
+	var file_list = util.isArray(class_json[indicators.EXTENDS]) ?
+		class_json[indicators.EXTENDS] :
+		class_json[indicators.EXTENDS] != null ?
+			[ class_json[indicators.EXTENDS] ] :
+			[];
+
+	// Delete @extends from base_json to avoid infinitive recursion
+	delete class_json[indicators.EXTENDS];
+
+	// Push class_json to the path list:
+	file_list.push(class_json);
+
+	/*****************************************************************************
+	*  Merge file by file
+	*****************************************************************************/
+
+	// default config for each file required:
+	// set asText = false so we get an object returned
+	// set scope = file's directory so there can be relative references
+	var json_config = util.defaults({
+		asText: false,
+		scope: options._as ? path.dirname(file_path) : options.scope,
+
+		// _as is a hack so that we know its we are calling the function recursive
+		_as: ANTI_SANITIZER
+	}, options);
+
+	// super_json is our output, start by containing first file in array
+	var super_json = fromFile(file_list.shift(), json_config);
+
+	// TODO: Figure out when to sanitize super_json hopefully we don't have to
+	//   santize all returns. I'm not sure about this, and I'm not sure if we
+	//   can even sanitize super_json when we return it.
+	//   Is super_json used by anyone recursively?
+
+	while (file_list.length) {
+		var json = fromFile(file_list.shift(), json_config);
+
+		merge(super_json, json);
+	}
+
+	// If this file is called from the outside eg json_merger.from...
+	//   File('file_which_doesnt_extends_another_file.json')
+	//   we need to sanitize the file and remove all indicators
+	if (options._as != ANTI_SANITIZER) {
+		super_json = util.sanitizeValue(super_json, true, true);
+	}
+
+	/*****************************************************************************
+	*  Return super_json
+	*****************************************************************************/
+
+	return super_json;
+};
+
+/*******************************************************************************
 *  fromFile
 *******************************************************************************/
 
@@ -358,5 +429,6 @@ module.exports = {
 	parseFile: parseFile,
 	stringify: stringify,
 	fromFile: fromFile,
+	fromObject: fromObject,
 	merge: merge
 };
