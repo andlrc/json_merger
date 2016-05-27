@@ -7,9 +7,10 @@ var ANTI_SANITIZER = {};
 var indicators = require('./indicators.js');
 var control_chars = require('./control_chars.js');
 var util = require('./util.js');
-/***************************************************************************************************
+/*******************************************************************************
 *  parseFile
-***************************************************************************************************/
+*******************************************************************************/
+
 var parseFile = function(file, options) {
 	var data = fs.readFileSync(file, 'utf-8');
 
@@ -24,9 +25,25 @@ var parseFile = function(file, options) {
 	}
 	return JSON.parse(data);
 };
-/***************************************************************************************************
+
+/*******************************************************************************
+*  stringify
+*******************************************************************************/
+
+var stringify = function(json, options) {
+	var indent = options.asText == 'pretty' ? '\t' : null;
+	if (options.javascript) {
+		return util.js.stringify(json, indent);
+	}
+	else {
+		return JSON.stringify(json, null, indent);
+	}
+};
+
+/*******************************************************************************
 *  processors
-***************************************************************************************************/
+*******************************************************************************/
+
 var processors = {};
 
 processors.primitive = function(super_value, class_value, path, root) {
@@ -66,7 +83,8 @@ processors.object = function(super_value, class_value, path, root) {
 		}
 	});
 
-	// If delete is an array and child_key is present set super_value to control_chars.DELETE.
+	// If delete is an array and child_key is present set super_value to
+	// control_chars.DELETE.
 	var delete_action = class_value[indicators.DELETE];
 	if (util.isArray(delete_action)) {
 		util.each(super_value, function(child_value, child_key) {
@@ -83,9 +101,9 @@ processors.array = function(super_value, class_value, path, root) {
 	// Store childs that have the @append, @prepend, @insert indicator
 	var inserts = [];
 
-	// Use prepend_index to store the current index that we are prepending at, eg with two
-	//   or more prepends we to make sure that the first @prepend
-	//   will be first item of the prepented items and not the last.
+	// Use prepend_index to store the current index that we are prepending at, eg
+	// with two or more prepends we to make sure that the first @prepend will be
+	// first item of the prepented items and not the last.
 	var prepend_index = 0;
 
 	// Use super_child_key to store array index relative to super_value.
@@ -107,19 +125,23 @@ processors.array = function(super_value, class_value, path, root) {
 			inserts.push([child_value[indicators.INSERT], child_value]);
 		}
 		else if (util.has(child_value, indicators.MATCH)) {
-			// Send in parent path to avoid having to go up then down to match a specific item in an array
-			// So you can use @match: "[name=john]" instead of @match: "../[name=john]"
+			// Send in parent path to avoid having to go up then down to match a
+			// specific item in an array
+			// So you can use:
+			// '@match: "[name=john]"' instead of '@match: "../[name=john]"'
 			var matchInfo = util.pathQuery(child_value[indicators.MATCH], path, root);
 
-			// If match is not found simply ignore and preserve super_value's child_value
-			// Else determinate what to do, delete/override/etc
+			// If match is *not* found ignore and preserve super_value's child_value.
+			// If match is found determinate what to do, delete/override/etc
 			if (matchInfo != null) {
 				// Call recursive with match info's object and child_value
 				// Remove @match to prevent recursive iteration
 				delete child_value[indicators.MATCH];
-				var merge_json = processors.unknown(matchInfo.object, child_value, matchInfo.path, root);
+				var merge_json = processors.unknown(matchInfo.object, child_value,
+					matchInfo.path, root);
 
-				// control_chars.DELETE indicates that we have to delete the original match
+				// control_chars.DELETE indicates that we have to delete the original
+				// match
 				if (merge_json === control_chars.DELETE) {
 					util.deleteProperty(root, matchInfo.path);
 				}
@@ -141,7 +163,8 @@ processors.array = function(super_value, class_value, path, root) {
 			super_value.splice(super_child_key, 1);
 		}
 		else {
-			super_value[super_child_key] = processors.unknown(super_value[super_child_key], child_value, path + '/' + child_key, root);
+			super_value[super_child_key] = processors.unknown(
+				super_value[super_child_key], child_value, path + '/' + child_key, root);
 			super_child_key++;
 		}
 	});
@@ -177,13 +200,14 @@ processors.unknown = function(super_value, class_value, path, root) {
 		class_value = class_value[indicators.VALUE];
 	}
 
-	// Force delete the super_value if class_value have the @delete indicator set to true
-	//   This will allow deletion of primitives and arrays, with the following syntax:
-	//     super = { arr: [ 1, 2, 3 ] }
-	//     child = { arr: { "@delete": true } }
+	// Force delete the super_value if class_value have the @delete indicator set
+	// to true. This will allow deletion of primitives and arrays, with the
+	// following syntax:
+	// super = { arr: [ 1, 2, 3 ] }
+	// child = { arr: { "@delete": true } }
 	if (util.isObject(class_value) && util.has(class_value, indicators.DELETE)) {
-		// If delete is set to true return control_chars.DELETE, this will delete the property
-		//    in the JSON.stringify
+		// If delete is set to true return control_chars.DELETE, this will delete
+		// the property in the JSON.stringify
 		// If delete is set to an array delete those properties
 		if (class_value[indicators.DELETE] === true) {
 			return control_chars.DELETE;
@@ -193,42 +217,45 @@ processors.unknown = function(super_value, class_value, path, root) {
 	var super_type = util.getType(super_value);
 	var class_type = util.getType(class_value);
 
-	/***********************************************************************************************
+	/*****************************************************************************
 	*  Primitives
-	***********************************************************************************************/
+	*****************************************************************************/
 	if (util.isPrimitive(super_type) || util.isPrimitive(class_type)) {
 		return processors.primitive(super_value, class_value, path, root);
 	}
-	/***********************************************************************************************
+	/*****************************************************************************
 	*  Different types
-	***********************************************************************************************/
+	*****************************************************************************/
 	if (super_type != class_type) {
 		return processors.dirrentType(super_value, class_value, path, root);
 	}
-	/***********************************************************************************************
+	/*****************************************************************************
 	*  Objects
-	***********************************************************************************************/
+	*****************************************************************************/
 	if (util.isObject(class_value)) {
 		return processors.object(super_value, class_value, path, root);
 	}
-	/***********************************************************************************************
+	/*****************************************************************************
 	*  Arrays
-	***********************************************************************************************/
+	*****************************************************************************/
 	if (util.isArray(class_value)) {
 		return processors.array(super_value, class_value, path, root);
 	}
 
 	throw new Error('Unsupported type.');
 };
-/***************************************************************************************************
+
+/*******************************************************************************
 *  merge
-***************************************************************************************************/
+*******************************************************************************/
+
 var merge = function(super_json, child_json) {
 	return processors.unknown(super_json, child_json, null, super_json);
 };
 /***************************************************************************************************
 *  fromFile
-***************************************************************************************************/
+*******************************************************************************/
+
 var fromFile = function(file, opts) {
 	if (util.isObject(file) || util.isArray(file)) {
 		return file;
@@ -244,9 +271,11 @@ var fromFile = function(file, opts) {
 	}, opts);
 
 	file = util.template(file, options.variables);
-	/***********************************************************************************************
+
+	/*****************************************************************************
 	*  Initialize
-	***********************************************************************************************/
+	*****************************************************************************/
+
 	var file_path;
 
 	// If the file path is absolute use it
@@ -274,9 +303,9 @@ var fromFile = function(file, opts) {
 
 	// Push class_json to the path list:
 	file_list.push(class_json);
-	/***********************************************************************************************
+	/*****************************************************************************
 	*  Merge file by file
-	***********************************************************************************************/
+	*****************************************************************************/
 
 	// default config for each file required:
 	// set asText = false so we get an object returned
@@ -310,27 +339,24 @@ var fromFile = function(file, opts) {
 		super_json = util.sanitizeValue(super_json, true, true);
 	}
 
-	/***********************************************************************************************
+	/*****************************************************************************
 	*  Return super_json
-	***********************************************************************************************/
-	if (options.asText == 'pretty' && options.javascript) {
-		return util.js.stringify(super_json, '\t');
-	}
-	if (options.asText && options.javascript) {
-		return util.js.stringify(super_json);
-	}
-	if (options.asText == 'pretty') {
-		return JSON.stringify(super_json, null, '\t');
-	}
+	*****************************************************************************/
 	if (options.asText) {
-		return JSON.stringify(super_json);
+		return stringify(super_json, options);
 	}
-	return super_json;
+	else {
+		return super_json;
+	}
 };
-/***************************************************************************************************
+
+/*******************************************************************************
 *  exports
-***************************************************************************************************/
+*******************************************************************************/
+
 module.exports = {
+	parseFile: parseFile,
+	stringify: stringify,
 	fromFile: fromFile,
 	merge: merge
 };
