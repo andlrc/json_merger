@@ -2,15 +2,17 @@
 [![json_merger version](https://img.shields.io/npm/v/json_merger.svg)](https://www.npmjs.com/package/json_merger)
 [![json_merger license](https://img.shields.io/npm/l/json_merger.svg)](https://www.npmjs.com/package/json_merger)
 
-## Table of Contents:
+Table of Contents:
+------------------
 
 * [`.fromFile('file.json')`](#fromfilefilejson)
-  * [config](#config)
-    * [asText](#configastext)
-    * [javascript](#configjavascript)
-    * [scope](#configscope)
-    * [variables](#configvariables)
-  * [`@extends`](#extends)
+* [`.fromObject(object)`](#fromobjectobject)
+* [config](#config)
+  * [asText](#configastext)
+  * [javascript](#configjavascript)
+  * [scope](#configscope)
+  * [variables](#configvariables)
+* [`@extends`](#extends)
 * [Indicators](#indicators)
   * [`@extends`](#extends)
   * [`@override`](#override)
@@ -28,10 +30,11 @@
 
 Apply indicators such as [`@insert`](#append-prepend-insert), [`@match`](#match) and [`@override`](#override) to tell the processor how to merge the files.
 
-## `.fromFile('file.json')`
+`.fromFile('file.json')`
+------------------------
 
     var json_merger = require('json_merger');
-    var result = json_merger = json_merger.fromFile('fileA.json');
+    var result = json_merger.fromFile('fileA.json');
 
 **fileA.json:**
 
@@ -75,7 +78,56 @@ Result:
 }
 ```
 
-### config
+`.fromObject(object)`
+------------------------
+
+```javascript
+var json_merger = require('json_merger');
+
+var objA = {
+	"@extends": "fileB.json",
+		"prop1": {
+			"@override": true,
+			"prop_a": "this will override fileB.json's property prop1"
+	},
+		"prop2": {
+		"prop_a": "some value"
+	}
+};
+
+var result = json_merger.fromObject(objA);
+```
+
+
+**fileB.json:**
+
+```json
+{
+	"prop1": {
+		"prop_b": "never gonna be seen"
+	},
+	"prop2": {
+		"prop_b": "some other value"
+	}
+}
+```
+
+Result:
+
+```json
+{
+	"prop1": {
+		"prop_a": "this will override fileB.json's property prop1"
+	},
+	"prop2": {
+		"prop_a": "some value",
+		"prop_b": "some other value"
+	}
+}
+```
+
+config
+------
 
 ```javascript
 {
@@ -88,28 +140,28 @@ Result:
 }
 ```
 
-#### config.asText
+### config.asText
 
 default: `false` (in command line interface it will default to true)
 
 Values are `true`, `false`, `pretty` where pretty will indent the JSON with `\t` for each block.
 
-#### config.javascript
+### config.javascript
 
 *Expiremental*
 
 default: `false`
 
-Perserve JavaScript functions, regexp, etc see [Expiremental usage](#expiremental-usage)
+Preserve JavaScript functions, regexp, etc see [Expiremental usage](#expiremental-usage)
 
-#### config.scope
+### config.scope
 
 default: [`process.cwd()`](https://nodejs.org/api/process.html#process_process_cwd)
 
 
 The initial directory which the inputFile is relative too, will be overridden for each [`@extends`](#extends) file and is set to dirname of current inputFile.
 
-#### config.variables
+### config.variables
 
 default: `{}`
 
@@ -131,7 +183,8 @@ json_merger.fromFile('fileA.json', {
 
 --------
 
-## Indicators:
+Indicators:
+-----------
 
 ### `@extends`
 
@@ -520,7 +573,8 @@ This can be matches in [`@match`](#match) using the following syntax:
 
 --------
 
-## `.merge(objA, objB)`
+`.merge(objA, objB)`
+--------------------
 
 You can use json_merger without having to use JSON stored in files, you can use it directly with JavaScript objects:
 
@@ -547,7 +601,8 @@ console.log(result.a.my_b_value); // undefined
 
 --------
 
-## Command line interface `json_merger`
+Command line interface `json_merger`
+------------------------------------
 
 You can use json_merger as a command line tool:
 
@@ -583,7 +638,8 @@ npm install json_merger
 export PATH=/path/to/my/json_merger/bin/:$PATH
 ```
 
-## Experimental Usage:
+Experimental Usage:
+-------------------
 
 Working with JavaScript code in JSON *Use at own risk :-)*
 
@@ -631,7 +687,8 @@ Result:
 }
 ```
 
-## Root indicators ##
+Root indicators
+---------------
 
 Root indicators is properties that are only supported on the outer most level of the JSON tree.
 
@@ -639,7 +696,8 @@ Current supported root indicators:
 
 * [`@extends`](#extends)
 
-## License: ##
+License:
+--------
 
 The MIT License (MIT)
 
