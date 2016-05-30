@@ -24,12 +24,15 @@ var indicators = {
 	MATCH: '@match'
 };
 
-indicators.ALL = Object.keys(indicators).map(function(key) {
+var ALL = Object.keys(indicators).map(function(key) {
 	return indicators[key];
 });
 
-indicators.ALL_EXCL_ID = indicators.ALL.filter(function(indicator) {
+var ALL_EXCL_ID = ALL.filter(function(indicator) {
 	return indicator != indicators.ID;
 });
+
+indicators.ALL = ALL;
+indicators.ALL_EXCL_ID = ALL_EXCL_ID;
 
 module.exports = indicators;
