@@ -606,16 +606,19 @@ Command line interface `json_merger`
 
 You can use json_merger as a command line tool:
 
-    usage:
-      json_merger inputFile [...options]
+    Usage: json_merger <file> [OPTIONS]
 
-    options:
-      --help, -h                    Show this page
-      --pretty, -p                  Prettify the output json
-      --javascript, -j              Perserve JavaScript functions, regexp, etc
-      --variables, -v               Send key=value list of variables
-                                      Usage: -v key1=value1 key2=value2
+    Mandatory arguments to long options are mandatory for short options too.
 
+      -p, --pretty            Prettify the output json
+      -j, --javascript        Perserve JavaScript functions, regex, etc...
+      -v, --variables         Send key=value list of variables
+                                Usage -v key1=value1 -v key2=value2
+
+      -h, --help              Show this help
+      -v, --version           Show the version
+        usage:
+          json_merger inputFile [...options]
 
 Usage:
 
@@ -626,16 +629,10 @@ json_merger input.json --javascript > out.json
 json_merger input.json -p -j -v "root=/var/www/" > out.json
 ```
 
-Make sure that add json_merger to the `$PATH` variable:
+Make sure that add json_merger to the `$PATH` variable.
 
 ```sh
-npm install json_merger
-```
-
-**~/.bashrc ( *~/.bash_profile* on OSX )**
-
-```sh
-export PATH=/path/to/my/json_merger/bin/:$PATH
+npm install -g json_merger
 ```
 
 Experimental Usage:

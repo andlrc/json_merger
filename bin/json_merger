@@ -1,70 +1,112 @@
 #!/usr/bin/env node
-"use strict";
+// vim: fdm=marker fmr={{{,}}}
+
+var pgm = process.argv[1].replace(/.*\//, '');
+var version = '1.0.9';
+
 var fs = require('fs');
 var json_merger = require('../json_merger.js');
-/***************************************************************************************************
-*  main
-***************************************************************************************************/
-var input = process.argv[2];
-var user_args = process.argv.slice(3);
 
-var r_keyValue = /^(.*?)=(.*?)$/;
+// Command line options --------------------------------------------------- {{{
 
-var pretty;
-var javascript;
-var variables = {};
+var options = {
+	file: null,
+	pretty: false,
+	javascript: false,
+	variables: {}
+};
 
-var var_gate = false;
+// }}}
+// Print help ------------------------------------------------------------- {{{
 
-if (input == '-h' || input == '--help') {
-	console.log('');
-	console.log('usage:');
-	console.log('  json_merger inputFile [...options]');
-	console.log('');
-	console.log('options:');
-	console.log('  --help, -h                    Show this page');
-	console.log('  --pretty, -p                  Prettify the output json');
-	console.log('  --javascript, -j              Perserve JavaScript functions, regexp, etc');
-	console.log('  --variables, -v               Send key=value list of variables');
-	console.log('                                  Usage: -v key1=value1 key2=value2');
+function print_help() {
+
+console.log(`Usage: ${pgm} <file> [OPTIONS]
+
+Mandatory arguments to long options are mandatory for short options too.
+
+  -p, --pretty            Prettify the output json
+  -j, --javascript        Perserve JavaScript functions, regex, etc...
+  -v, --variables         Send key=value list of variables
+                            Usage -v key1=value1 -v key2=value2
+
+  -h, --help              Show this help
+  -v, --version           Show the version`);
 }
-else {
-	user_args.forEach(function(arg, key) {
-		if (arg == '-p' || arg == '--pretty') {
-			pretty = true;
-		}
-		else if (arg == '-j' || arg == '--javascript') {
-			javascript = true;
-		}
 
-		// Open the var_gate meaning that the next options will be key->value variables
-		else if (arg == '-v' || arg == '--variables') {
-			var_gate = true;
-		}
+// }}}
+// Parse Arguments -------------------------------------------------------- {{{
 
-		// Match variables for key->value:
-		//   key1=value1
-		else if (var_gate && r_keyValue.test(arg)) {
-			var match = arg.match(r_keyValue);
+function parse_argv(argv) {
 
-			variables[match[1]] = match[2];
+	var r_keyValue = /^(.*?)=(.*?)$/;
+
+	// Sanitize argv: ["hello=world"] => ["hello", "world"]
+	argv = [].concat.apply([], process.argv.slice(2).map(function(val) {
+		return val.match(/^(?:(.*?)=)?(.*?)$/).filter(function(v, k) {
+			return k && v;
+		});
+	}));
+
+	argv.push('--');
+
+	outer: for (;;) {
+
+		var a = argv.shift();
+		switch (a) {
+			case '-p': case '--pretty':
+				options.pretty = true;
+				break;
+			case '-j': case '--javascript':
+				options.javascript = true;
+				break;
+			case '-v': case '--variables':
+				var match = argv.shift().match(r_keyValue);
+				options.variables[match[1]] = match[1];
+				break;
+			case '-h': case '--help':
+				print_help(); process.exit();
+				break;
+			case '-v': case '--version':
+				console.log(`${pgm} version: ${version}`); process.exit();
+				break;
+			case '--':
+				break outer;
+			default:
+				if (!options.file && fs.existsSync(a)) {
+					options.file = a;
+				}
+				else {
+					process.stderr.write(`${pgm}: unrecognized option '${a}'\n`);
+					process.stderr.write(`Try '${pgm} --help' for more information.\n`);
+					process.exit(1);
+				}
+				break;
 		}
-		else {
-			var_gate = false;
-		}
+	}
+}
+
+// }}}
+// Main ------------------------------------------------------------------- {{{
+
+function main(argv) {
+	argv = parse_argv(argv);
+
+	if (!options.file) {
+		process.stderr.write('Missing <file>\n');
+		process.exit(1);
+	}
+
+	var output = json_merger.fromFile(options.file, {
+		asText: options.pretty ? 'pretty' : true,
+		javascript: options.javascript,
+		variables: options.variables,
+		scope: process.cwd()
 	});
 
-	if (input == null || !fs.existsSync(input)) {
-		console.log('Requires filename as first argument');
-	}
-	else {
-		var output = json_merger.fromFile(input, {
-			asText: pretty ? 'pretty' : true,
-			javascript: javascript,
-			variables: variables,
-			scope: process.cwd()
-		});
-
-		console.log(output);
-	}
+	console.log(output);
 }
+
+//  }}}
+
+main(process.argv);
