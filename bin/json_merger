@@ -2,7 +2,7 @@
 // vim: fdm=marker fmr={{{,}}}
 
 var pgm = process.argv[1].replace(/.*\//, '');
-var version = '1.0.9';
+var version = '1.0.10';
 
 var fs = require('fs');
 var json_merger = require('../json_merger.js');

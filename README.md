@@ -617,8 +617,6 @@ You can use json_merger as a command line tool:
 
       -h, --help              Show this help
       -v, --version           Show the version
-        usage:
-          json_merger inputFile [...options]
 
 Usage:
 
