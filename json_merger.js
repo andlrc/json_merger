@@ -47,18 +47,18 @@ var stringify = function(json, options) {
 var processors = {};
 
 processors.primitive = function(super_value, class_value, path, root) {
-	return util.sanitizeValue(class_value);
+	return class_value;
 };
 processors.dirrentType = function(super_value, class_value, path, root) {
 
-	return util.sanitizeValue(class_value, true);
+	return class_value;
 };
 processors.object = function(super_value, class_value, path, root) {
 	// If override is set to true return the class_value
 	// If override is set to an array override those properties
 	var override_action = class_value[indicators.OVERRIDE];
 	if (override_action === true) {
-		return util.sanitizeValue(class_value, true);
+		return class_value;
 	}
 
 	util.each(class_value, function(child_value, child_key) {
@@ -69,12 +69,12 @@ processors.object = function(super_value, class_value, path, root) {
 
 		// If super doesnt have the value simply set it
 		if (!util.has(super_value, child_key)) {
-			super_value[child_key] = util.sanitizeValue(child_value, true);
+			super_value[child_key] = child_value;
 		}
 
 		// If override is an array and child_key is present set it on super_value
 		else if (override_action && override_action.indexOf(child_key) > -1) {
-			super_value[child_key] = util.sanitizeValue(child_value, true);
+			super_value[child_key] = child_value;
 		}
 
 		// call function again and set return on super_value
@@ -95,7 +95,7 @@ processors.object = function(super_value, class_value, path, root) {
 		});
 	}
 
-	return util.sanitizeValue(super_value);
+	return super_value;
 };
 processors.array = function(super_value, class_value, path, root) {
 	// Store childs that have the @append, @prepend, @insert indicator
@@ -178,17 +178,17 @@ processors.array = function(super_value, class_value, path, root) {
 		//   Therefore we need to use push if index = -1
 		//   and we need to index++ if index is less than -1
 		if (index == -1) {
-			super_value.push(util.sanitizeValue(child_value, true));
+			super_value.push(child_value);
 		}
 		else {
 			if (index < -1) {
 				index++;
 			}
-			super_value.splice(index, 0, util.sanitizeValue(child_value, true));
+			super_value.splice(index, 0, child_value);
 		}
 	});
 
-	return util.sanitizeValue(super_value);
+	return super_value;
 };
 processors.unknown = function(super_value, class_value, path, root) {
 	if (path == null) {
@@ -313,7 +313,7 @@ var fromObject = function(class_json, opts) {
 	//   File('file_which_doesnt_extends_another_file.json')
 	//   we need to sanitize the file and remove all indicators
 	if (options._as != ANTI_SANITIZER) {
-		super_json = util.sanitizeValue(super_json, true, true);
+		super_json = util.sanitizeValue(super_json);
 	}
 
 	/*****************************************************************************
@@ -407,7 +407,7 @@ var fromFile = function(file, opts) {
 	//   File('file_which_doesnt_extends_another_file.json')
 	//   we need to sanitize the file and remove all indicators
 	if (options._as != ANTI_SANITIZER) {
-		super_json = util.sanitizeValue(super_json, true, true);
+		super_json = util.sanitizeValue(super_json);
 	}
 
 	/*****************************************************************************
